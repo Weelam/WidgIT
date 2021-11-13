@@ -1,0 +1,10 @@
+.box {
+  background: red;
+  width: 100px;
+  height: 100px;
+  cursor: move;
+}
+
+.widgit-widget.widgit-dragging {
+  opacity: 0.5;
+}
