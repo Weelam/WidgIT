@@ -5,6 +5,35 @@
   cursor: move;
 }
 
-.widgit-widget.widgit-dragging {
+
+
+// .wrap {
+// 	position: relative;
+// }
+
+.widgit-dragging {
   opacity: 0.5;
+  animation: begindrag 0.8s ease forwards;
+	// animation: begindrag forwards;
+	transform-origin: center;
+
+}
+
+@keyframes begindrag {
+  0% {
+    transform: scale(1);
+		// background-color: blue;
+  }
+
+  10% {
+    transform: rotate(0.5turn); 
+		transform: scale(1.1);
+		background-color: blue;
+
+  }
+
+	50% {
+		transform: scale(1);
+		background-color: red;
+	}
 }

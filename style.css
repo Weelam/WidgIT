@@ -5,7 +5,49 @@
   cursor: move;
 }
 
-.widgit-widget.widgit-dragging {
+.widgit-dragging {
   opacity: 0.5;
+  -webkit-animation: begindrag 0.8s ease forwards;
+          animation: begindrag 0.8s ease forwards;
+  -webkit-transform-origin: center;
+          transform-origin: center;
+}
+
+@-webkit-keyframes begindrag {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  10% {
+    -webkit-transform: rotate(0.5turn);
+            transform: rotate(0.5turn);
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+    background-color: blue;
+  }
+  50% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    background-color: red;
+  }
+}
+
+@keyframes begindrag {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  10% {
+    -webkit-transform: rotate(0.5turn);
+            transform: rotate(0.5turn);
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+    background-color: blue;
+  }
+  50% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    background-color: red;
+  }
 }
 /*# sourceMappingURL=style.css.map */

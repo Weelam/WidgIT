@@ -1,55 +1,83 @@
 const widgets = document.querySelectorAll(".widgit-widget");
 
+let timeout_id;
 
-widgets.forEach(widget => {
-	// clone the node, append it to the parent with position fixed 
+const handleMouseDown = (e, widget) => {
+  // clone node
+  // const parentNode = widget.parentNode;
+  // let widgetClone = widget.cloneNode(true);
+  // widgetClone.classList.remove(...widgetClone.classList);
+  // widgetClone.classList.add("widgit-widget")
+  // widgetClone.classList.add("box")
 
-	//
-	widget.addEventListener("mousedown", (e) => {
+  // parentNode.append(widgetClone);
+  // console.log(widgetClone)
+  timeout_id = setTimeout(() => {
+    // add class
+		widget.classList.add("widgit-dragging");
+    widget.style.position = "fixed";
+    widget.style.cursor = "move";
 
-		let prevX = e.clientX;
-		let prevY = e.clientY;
+    console.log("dragging now");
+    // this only happens when we mouse down
+    let x1 = e.clientX;
+    let y1 = e.clientY;
+    // console.log("x1", x1, "y1", y1);
 
-		console.log(prevX, prevY);
+    const handleMouseMove = (e) => {
+      let x2 = e.clientX - x1;
+      let y2 = e.clientY - y1;
+      // console.log("x2", x2, "y2", y2);
 
-		const handleMouseMove = (e) => {		
+      const bounding = widget.getBoundingClientRect();
 
-			let newX = e.clientX - prevX;
-			let newY = e.clientY - prevY;
+      // rather than reassigning the position to your cursor location, we are updating the position properties instead
+      // through adding an subtracting x2 and y2. By doing so, the element doesn't teleporate to your cursor position
+      // when you start dragging.
+      widget.style.left = bounding.left + x2 + "px";
+      widget.style.top = bounding.top + y2 + "px";
+      let data = {
+        x2: x2,
+        y2: y2,
+        boundingLeft: bounding.left,
+        boundingTop: bounding.top,
+      };
+      console.log("left", widget.style.left, "top", widget.style.top);
+      console.log(data);
+      // need to reassign since clientX and clientY is always changing whenever we move
 
-			console.log(newX, newY);
-			
-			const bounding = widget.getBoundingClientRect();
+      x1 = e.clientX;
+      y1 = e.clientY;
+    };
 
-			widget.style.left = bounding.left + newX + "px";
-			widget.style.top = bounding.top + newY + "px";
+    const handleMouseUp = () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+      widget.classList.remove("widgit-dragging");
+    };
 
-			prevX = e.clientX;
-			prevY = e.clientY;
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleMouseUp);
+  }, 1000);
+};
 
-			widget.style.position = "fixed";
-			widget.style.cursor = "move";
-		}
+const resetTimeout = (timeout_id) => {
+  clearTimeout(timeout_id);
+  console.log("timeout cleared");
+};
 
-		const handleMouseUp = () => {
-			console.log("mouse up");
-			window.removeEventListener("mousemove", handleMouseMove)
-			window.removeEventListener("mouseup", handleMouseUp)
-		}
+widgets.forEach((widget) => {
+  // when mouse is down
+  widget.addEventListener("mousedown", (e) => handleMouseDown(e, widget));
 
-		window.addEventListener("mousemove", handleMouseMove)
-		window.addEventListener("mouseup", handleMouseUp)
-
-
-	})
-})
-
-
+  // reset widget timeout
+  widget.addEventListener("mouseup", () => resetTimeout(timeout_id));
+  widget.addEventListener("mouseleave", () => resetTimeout(timeout_id));
+});
 
 // drag and drop
 // widgets.forEach((widget) => {
 //   widget.setAttribute("draggable", true);
-
 
 //   widget.addEventListener("dragstart", (e) => {
 // 		widget.classList.add("widgit-dragging");
@@ -59,7 +87,6 @@ widgets.forEach(widget => {
 // 		// let image = new Image();
 // 		// image.src =  "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
 // 		e.dataTransfer.setDragImage(e.target, 0, 0);
-
 
 // 	});
 
@@ -71,7 +98,7 @@ widgets.forEach(widget => {
 // 		widget.classList.remove("widgit-dragging");
 // 		widget.style.top = e.clientY + "px";
 // 		widget.style.left = e.clientX + "px";
-		
+
 // 	});
 // });
 
