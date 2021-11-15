@@ -87,20 +87,20 @@ const handleResizer = (widget, resizeNodes) => {
         const x2 = e.clientX - x1;
         const y2 = e.clientY - y1;
 
-        if (currentResizer.classList.contains("se")) {
+        if (currentResizer.classList.contains("widgit-se")) {
           widget.style.width = bounding.width + x2 + "px";
           widget.style.height = bounding.height + y2 + "px";
-        } else if (currentResizer.classList.contains("sw")) {
-          widget.style.width = bounding.width + x2 + "px";
+        } else if (currentResizer.classList.contains("widgit-sw")) {
+          widget.style.width = bounding.width - x2 + "px";
           widget.style.height = bounding.height + y2 + "px";
           widget.style.left = bounding.left + x2 + "px";
-        } else if (currentResizer.classList.contains("ne")) {
+        } else if (currentResizer.classList.contains("widgit-ne")) {
           widget.style.width = bounding.width + x2 + "px";
-          widget.style.height = bounding.height + y2 + "px";
+          widget.style.height = bounding.height - y2 + "px";
           widget.style.top = bounding.top + y2 + "px";
         } else {
-          widget.style.width = bounding.width + x2 + "px";
-          widget.style.height = bounding.height + y2 + "px";
+          widget.style.width = bounding.width - x2 + "px";
+          widget.style.height = bounding.height  - y2 + "px";
           widget.style.top = bounding.top + y2 + "px";
           widget.style.left = bounding.left + x2 + "px";
         }
