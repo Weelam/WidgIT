@@ -26,14 +26,47 @@
   }
 
   10% {
-    transform: rotate(0.5turn); 
+    // transform: rotate(0.5turn); 
 		transform: scale(1.1);
 		background-color: blue;
-
   }
 
 	50% {
 		transform: scale(1);
 		background-color: red;
 	}
+}
+
+.widgit-sizer {
+	position: absolute;
+	background-color: transparent;
+	z-index: 3;
+	width: 15px;
+	height: 15px;
+}
+
+.widgit-sizer.widgit-nw {
+	cursor: nw-resize;
+	top: 0px;
+	left: 0px;
+}
+
+.widgit-sizer.widgit-ne {
+	cursor: ne-resize;
+	top: 0px;
+	right: 0px;
+}
+
+.widgit-sizer.widgit-sw {
+	cursor: sw-resize;
+	bottom: 0px;
+	left: 0px;
+
+}
+
+.widgit-sizer.widgit-se {
+	cursor: se-resize;
+	bottom: 0px;
+	right: 0px;
+
 }
