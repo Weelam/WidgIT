@@ -8,18 +8,6 @@ html, body {
   position: relative;
 }
 
-.widgit-widgit {
-  cursor: move;
-}
-
-.widgit-dragging {
-  opacity: 0.5 !important;
-  -webkit-animation: begindrag 0.8s ease forwards;
-          animation: begindrag 0.8s ease forwards;
-  -webkit-transform-origin: center;
-          transform-origin: center;
-}
-
 @-webkit-keyframes begindrag {
   0% {
     -webkit-transform: scale(1);
@@ -52,37 +40,5 @@ html, body {
             transform: scale(1);
     background-color: red;
   }
-}
-
-.widgit-sizer {
-  position: absolute;
-  background-color: transparent;
-  z-index: 3;
-  width: 15px;
-  height: 15px;
-}
-
-.widgit-sizer.widgit-nw {
-  cursor: nw-resize;
-  top: 0px;
-  left: 0px;
-}
-
-.widgit-sizer.widgit-ne {
-  cursor: ne-resize;
-  top: 0px;
-  right: 0px;
-}
-
-.widgit-sizer.widgit-sw {
-  cursor: sw-resize;
-  bottom: 0px;
-  left: 0px;
-}
-
-.widgit-sizer.widgit-se {
-  cursor: se-resize;
-  bottom: 0px;
-  right: 0px;
 }
 /*# sourceMappingURL=style.css.map */

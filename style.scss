@@ -5,19 +5,14 @@
   
 }
 
-
 html, body {
 	position: relative;
 }
 
-.widgit-widgit {
-	cursor: move;
-}
-
 .widgit-dragging {
-  opacity: 0.5 !important;
-  animation: begindrag 0.8s ease forwards;
-	transform-origin: center;
+  // opacity: 0.5 !important;
+  // animation: begindrag 0.8s ease forwards;
+	// transform-origin: center;
 }
 
 @keyframes begindrag {
@@ -38,36 +33,36 @@ html, body {
 	}
 }
 
-.widgit-sizer {
-	position: absolute;
-	background-color: transparent;
-	z-index: 3;
-	width: 15px;
-	height: 15px;
-}
+// .widgit-sizer {
+// 	position: absolute;
+// 	background-color: transparent;
+// 	z-index: 3;
+// 	width: 15px;
+// 	height: 15px;
+// }
 
-.widgit-sizer.widgit-nw {
-	cursor: nw-resize;
-	top: 0px;
-	left: 0px;
-}
+// .widgit-sizer.widgit-nw {
+// 	cursor: nw-resize;
+// 	top: 0px;
+// 	left: 0px;
+// }
 
-.widgit-sizer.widgit-ne {
-	cursor: ne-resize;
-	top: 0px;
-	right: 0px;
-}
+// .widgit-sizer.widgit-ne {
+// 	cursor: ne-resize;
+// 	top: 0px;
+// 	right: 0px;
+// }
 
-.widgit-sizer.widgit-sw {
-	cursor: sw-resize;
-	bottom: 0px;
-	left: 0px;
+// .widgit-sizer.widgit-sw {
+// 	cursor: sw-resize;
+// 	bottom: 0px;
+// 	left: 0px;
 
-}
+// }
 
-.widgit-sizer.widgit-se {
-	cursor: se-resize;
-	bottom: 0px;
-	right: 0px;
+// .widgit-sizer.widgit-se {
+// 	cursor: se-resize;
+// 	bottom: 0px;
+// 	right: 0px;
 
-}
+// }
