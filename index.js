@@ -51,35 +51,45 @@ const taskbarStyle = `
 	background: black;
 `;
 const widgets = document.querySelectorAll(".widgit-widget");
+console.log(widgets)
 let resizing = false;
 const resizes = ["widgit-se", "widgit-sw", "widgit-ne", "widgit-nw"];
 let timeout_id;
-let clonedWidgets = [];
+// [{widget: ... clone:[...]}] -> widget object structure
+let widgetObjects = []
+// instantiate all objects into widgetObjects
+widgets.forEach((widget, index) => {
+  let newObj = {
+    id: index,
+    original: widget,
+    clones: []
+  }
+  widgetObjects.push(newObj)
+})
 
-widgets.forEach((widget) => {
+console.log(widgetObjects)
+widgetObjects.forEach((widgetObject) => {
+  const widget = widgetObject["original"];
   // when mouse is down
-  widget.addEventListener("mousedown", (e) => handleMouseDown(e, widget));
+  widget.addEventListener("mousedown", (e) => handleMouseDown(e, widget, widgetObject));
 
   // reset widget timeout
   widget.addEventListener("mouseup", () => resetTimeout(timeout_id));
   widget.addEventListener("mouseleave", () => resetTimeout(timeout_id));
 });
 
-const handleMouseDown = (e, widget) => {
+const handleMouseDown = (e, widget, widgetObject) => {
   if (!resizing) {
     timeout_id = setTimeout(() => {
-      console.log(widget.getAttribute("clone"));
+      const originalWidget = widgetObject["original"]
+      // note: we don't know if "widget" is a clone or not
       if (!widget.getAttribute("clone")) {
-        widget = cloneWidget(widget);
-        console.log("new clone");
-      } else {
-        console.log("no new clone");
+        widget = cloneWidget(widget, widgetObject);
       }
 
       const wrapper = widget.parentNode;
-      console.log(wrapper);
       addResizer(widget);
-      openTaskBar(wrapper, true);
+      openTaskBar(wrapper, widget, widgetObject);
       // add widget styles
       widget.style.cssText += widgetStyle;
       widget.setAttribute("draggable", false);
@@ -139,24 +149,41 @@ const handleMouseDown = (e, widget) => {
 };
 
 // helper functions
-const openTaskBar = (wrapper, open) => {
-  if (open) {
+const openTaskBar = (wrapper, widget, widgetObject) => {
+    const originalWidget = widgetObject["original"]
     const taskbar = document.createElement("div");
-		wrapper.append(taskbar);
+    wrapper.append(taskbar);
     taskbar.style.cssText += taskbarStylePositioner + taskbarStyle;
 
     const removeWidget = document.createElement("button");
     removeWidget.innerHTML = "Remove";
-    removeWidget.onclick = () => wrapper.remove();
+    removeWidget.onclick = () => {
+      const index = widgetObject["clones"].indexOf(widget)
+      widgetObject["clones"].splice(index, 1)
+      wrapper.remove()
+      console.log(widgetObject)
+    };
     taskbar.append(removeWidget);
 
-		const closeButton = document.createElement("button");
-		closeButton.innerHTML = "Close";
-    closeButton.onclick = () => taskbar.remove();
+    const closeButton = document.createElement("button");
+    closeButton.innerHTML = "Close";
+    closeButton.onclick = () => taskbar.style.display = "none";
     taskbar.append(closeButton);
-  }
+
+    const scrollBack = document.createElement("button");
+    scrollBack.innerHTML = "Scroll";
+    scrollBack.onclick = () => {
+      // console.log(originalWidget)
+      originalWidget.scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+        inline: "nearest",
+      });
+    };
+    taskbar.append(scrollBack);
+  
 };
-const cloneWidget = (widget) => {
+const cloneWidget = (widget, widgetObject) => {
   // clone node
   const parentNode = widget.parentNode;
   let widgetClone = widget.cloneNode(true);
@@ -172,8 +199,11 @@ const cloneWidget = (widget) => {
   clonedParentNode.appendChild(wrapper);
 
   widgetClone.addEventListener("mousedown", (e) =>
-    handleMouseDown(e, widgetClone)
+    handleMouseDown(e, widgetClone, widgetObject)
   );
+
+  widgetObject["clones"].push(widgetClone);
+  console.log(widgetObject)
 
   // reset widget timeout
   widgetClone.addEventListener("mouseup", () => resetTimeout(timeout_id));
@@ -281,3 +311,12 @@ const resetTimeout = (timeout_id) => {
   clearTimeout(timeout_id);
   console.log("timeout cleared");
 };
+
+// const updateWidgetclones = () => {
+//   let newObj = {
+//     id: index,
+//     original: widget,
+//     clones: []
+//   }
+//   widgetObjects.push(newObj)
+// }
