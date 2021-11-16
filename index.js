@@ -1,6 +1,9 @@
 const widgets = document.querySelectorAll(".widgit-widget");
 let resizing = false;
+const resizes = ["widgit-se", "widgit-sw", "widgit-ne", "widgit-nw"];
 let timeout_id;
+let clonedWidgets = [];
+
 
 widgets.forEach((widget) => {
   // when mouse is down
@@ -12,24 +15,26 @@ widgets.forEach((widget) => {
 });
 
 const handleMouseDown = (e, widget) => {
-  // clone node
-  // const parentNode = widget.parentNode;
-  // let widgetClone = widget.cloneNode(true);
-  // widgetClone.classList.remove(...widgetClone.classList);
-  // widgetClone.classList.add("widgit-widget")
-  // widgetClone.classList.add("box")
-
-  // parentNode.append(widgetClone);
-  // console.log(widgetClone)
   if (!resizing) {
     timeout_id = setTimeout(() => {
+			console.log(widget.getAttribute("clone"))
+      if (!widget.getAttribute("clone")) {
+        widget = cloneWidget(widget);
+				console.log("new clone")
+      } else {
+				console.log("no new clone")
+			}
+
       addResizer(widget);
       // add class
-      widget.classList.add("widgit-dragging");
-      widget.style.position = "fixed";
+      // widget.classList.add("widgit-dragging");
+			widget.style.position = "fixed";
+      widget.style.cssText +=
+        "animation: begindrag 0.8s ease forwards; opacity: 0.5";
+      widget.setAttribute("draggable", false);
+      
       widget.style.cursor = "move";
 
-      console.log("dragging now");
       // this only happens when we mouse down
       let x1 = e.clientX;
       let y1 = e.clientY;
@@ -38,6 +43,7 @@ const handleMouseDown = (e, widget) => {
       const handleMouseMove = (e) => {
         let x2 = e.clientX - x1;
         let y2 = e.clientY - y1;
+
         // console.log("x2", x2, "y2", y2);
 
         const bounding = widget.getBoundingClientRect();
@@ -53,8 +59,8 @@ const handleMouseDown = (e, widget) => {
           boundingLeft: bounding.left,
           boundingTop: bounding.top,
         };
-        console.log("left", widget.style.left, "top", widget.style.top);
-        console.log(data);
+        // console.log("left",widget.style.left,"top",widget.style.top);
+        // console.log(data);
         // need to reassign since clientX and clientY is always changing whenever we move
 
         x1 = e.clientX;
@@ -65,12 +71,36 @@ const handleMouseDown = (e, widget) => {
         window.removeEventListener("mousemove", handleMouseMove);
         window.removeEventListener("mouseup", handleMouseUp);
         widget.classList.remove("widgit-dragging");
+        widget.style.opacity = null;
+        widget.style.animation = null;
       };
 
       window.addEventListener("mousemove", handleMouseMove);
       window.addEventListener("mouseup", handleMouseUp);
     }, 1000);
   }
+};
+
+const cloneWidget = (widget) => {
+  // clone node
+  const parentNode = widget.parentNode;
+  let widgetClone = widget.cloneNode(true);
+  widgetClone.classList.add("widgit-widget");
+  widgetClone.classList.add("box");
+  widgetClone.setAttribute("clone", true);
+  parentNode.append(widgetClone);
+
+	widgetClone.addEventListener("mousedown", (e) => handleMouseDown(e, widgetClone));
+
+  // reset widget timeout
+  widgetClone.addEventListener("mouseup", () => resetTimeout(timeout_id));
+  widgetClone.addEventListener("mouseleave", () => resetTimeout(timeout_id));
+
+	const bounding = widget.getBoundingClientRect();
+	widgetClone.style.position = "fixed";
+	widgetClone.style.top =  bounding.top + "px";
+	widgetClone.style.left = bounding.left + "px";
+  return widgetClone;
 };
 
 const handleResizer = (widget, resizeNodes) => {
@@ -100,7 +130,7 @@ const handleResizer = (widget, resizeNodes) => {
           widget.style.top = bounding.top + y2 + "px";
         } else {
           widget.style.width = bounding.width - x2 + "px";
-          widget.style.height = bounding.height  - y2 + "px";
+          widget.style.height = bounding.height - y2 + "px";
           widget.style.top = bounding.top + y2 + "px";
           widget.style.left = bounding.left + x2 + "px";
         }

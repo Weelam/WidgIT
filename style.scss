@@ -2,21 +2,22 @@
   background: red;
   width: 100px;
   height: 100px;
-  cursor: move;
+  
 }
 
 
+html, body {
+	position: relative;
+}
 
-// .wrap {
-// 	position: relative;
-// }
+.widgit-widgit {
+	cursor: move;
+}
 
 .widgit-dragging {
-  opacity: 0.5;
+  opacity: 0.5 !important;
   animation: begindrag 0.8s ease forwards;
-	// animation: begindrag forwards;
 	transform-origin: center;
-
 }
 
 @keyframes begindrag {

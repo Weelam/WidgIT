@@ -2,11 +2,18 @@
   background: red;
   width: 100px;
   height: 100px;
+}
+
+html, body {
+  position: relative;
+}
+
+.widgit-widgit {
   cursor: move;
 }
 
 .widgit-dragging {
-  opacity: 0.5;
+  opacity: 0.5 !important;
   -webkit-animation: begindrag 0.8s ease forwards;
           animation: begindrag 0.8s ease forwards;
   -webkit-transform-origin: center;
