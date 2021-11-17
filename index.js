@@ -51,27 +51,29 @@ const taskbarStyle = `
 	background: black;
 `;
 const widgets = document.querySelectorAll(".widgit-widget");
-console.log(widgets)
+console.log(widgets);
 let resizing = false;
 const resizes = ["widgit-se", "widgit-sw", "widgit-ne", "widgit-nw"];
 let timeout_id;
 // [{widget: ... clone:[...]}] -> widget object structure
-let widgetObjects = []
+let widgetObjects = [];
 // instantiate all objects into widgetObjects
 widgets.forEach((widget, index) => {
   let newObj = {
     id: index,
     original: widget,
-    clones: []
-  }
-  widgetObjects.push(newObj)
-})
+    clones: [],
+  };
+  widgetObjects.push(newObj);
+});
 
-console.log(widgetObjects)
+console.log(widgetObjects);
 widgetObjects.forEach((widgetObject) => {
   const widget = widgetObject["original"];
   // when mouse is down
-  widget.addEventListener("mousedown", (e) => handleMouseDown(e, widget, widgetObject));
+  widget.addEventListener("mousedown", (e) =>
+    handleMouseDown(e, widget, widgetObject)
+  );
 
   // reset widget timeout
   widget.addEventListener("mouseup", () => resetTimeout(timeout_id));
@@ -81,15 +83,15 @@ widgetObjects.forEach((widgetObject) => {
 const handleMouseDown = (e, widget, widgetObject) => {
   if (!resizing) {
     timeout_id = setTimeout(() => {
-      const originalWidget = widgetObject["original"]
+      const isClone = widget.getAttribute("clone");
       // note: we don't know if "widget" is a clone or not
-      if (!widget.getAttribute("clone")) {
+      if (!isClone) {
         widget = cloneWidget(widget, widgetObject);
+        addResizer(widget);
       }
-
       const wrapper = widget.parentNode;
-      addResizer(widget);
-      openTaskBar(wrapper, widget, widgetObject);
+      openTaskBar(wrapper, widget, widgetObject, isClone);
+
       // add widget styles
       widget.style.cssText += widgetStyle;
       widget.setAttribute("draggable", false);
@@ -149,25 +151,27 @@ const handleMouseDown = (e, widget, widgetObject) => {
 };
 
 // helper functions
-const openTaskBar = (wrapper, widget, widgetObject) => {
-    const originalWidget = widgetObject["original"]
+const openTaskBar = (wrapper, widget, widgetObject, isClone) => {
+  if (!isClone) {
+    const originalWidget = widgetObject["original"];
     const taskbar = document.createElement("div");
+    taskbar.setAttribute("taskbar", true);
     wrapper.append(taskbar);
     taskbar.style.cssText += taskbarStylePositioner + taskbarStyle;
 
     const removeWidget = document.createElement("button");
     removeWidget.innerHTML = "Remove";
     removeWidget.onclick = () => {
-      const index = widgetObject["clones"].indexOf(widget)
-      widgetObject["clones"].splice(index, 1)
-      wrapper.remove()
-      console.log(widgetObject)
+      const index = widgetObject["clones"].indexOf(widget);
+      widgetObject["clones"].splice(index, 1);
+      wrapper.remove();
+      console.log(widgetObject);
     };
     taskbar.append(removeWidget);
 
     const closeButton = document.createElement("button");
     closeButton.innerHTML = "Close";
-    closeButton.onclick = () => taskbar.style.display = "none";
+    closeButton.onclick = () => (taskbar.style.display = "none");
     taskbar.append(closeButton);
 
     const scrollBack = document.createElement("button");
@@ -181,7 +185,17 @@ const openTaskBar = (wrapper, widget, widgetObject) => {
       });
     };
     taskbar.append(scrollBack);
-  
+  } else {
+    let taskbarElement;
+    let wrapperArray = [...wrapper.children]
+    wrapperArray.forEach((element) => {
+      if (element.getAttribute("taskbar")) {
+        taskbarElement = element;
+      }
+    });
+    taskbarElement.style.display = "block";
+    console.log(taskbarElement)
+  }
 };
 const cloneWidget = (widget, widgetObject) => {
   // clone node
@@ -203,7 +217,7 @@ const cloneWidget = (widget, widgetObject) => {
   );
 
   widgetObject["clones"].push(widgetClone);
-  console.log(widgetObject)
+  console.log(widgetObject);
 
   // reset widget timeout
   widgetClone.addEventListener("mouseup", () => resetTimeout(timeout_id));
@@ -228,7 +242,6 @@ const handleResizer = (widget, resizeNodes) => {
     const handleResizeMouseDown = (e) => {
       currentResizer = e.target;
       resizing = true;
-
       let x1 = e.clientX;
       let y1 = e.clientY;
 
