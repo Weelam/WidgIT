@@ -1,5 +1,6 @@
 // inline styles
 const widgetStyle = `
+  border-radius: 10px;
 	animation: begindrag 0.8s ease forwards; 
 	opacity: 0.5;
 	z-index: 10;
@@ -41,15 +42,32 @@ const resizerStyle_se = `
 `;
 const taskbarStylePositioner = `
 	position: absolute;
-	height: 10px;
-	width: 10px;
+	height: 100%;
+	width: 100%;
 	z-index: 99999999999;
 `;
 const taskbarStyle = `
-	top: 0px;
-	right: -8px;
-	background: black;
+  height: auto;
+  position: absolute;
+  width: 40%;
+  z-index: 2147483647;
+  top: 0px;
+  right: -45%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  overflow: hidden;
+  background: #8E8E8E;
 `;
+
+const taskBarButtonStyle = `
+  background: none;
+  border-style: none;
+  color: white;
+  padding: .5rem .5rem;
+`;
+
+// actual code
 const widgets = document.querySelectorAll(".widgit-widget");
 console.log(widgets);
 let resizing = false;
@@ -153,12 +171,14 @@ const handleMouseDown = (e, widget, widgetObject) => {
 // helper functions
 const openTaskBar = (wrapper, widget, widgetObject, isClone) => {
   if (!isClone) {
+    // create taskbar
     const originalWidget = widgetObject["original"];
     const taskbar = document.createElement("div");
+    taskbar.classList.add("widgit-taskbar");
     taskbar.setAttribute("taskbar", true);
     wrapper.append(taskbar);
     taskbar.style.cssText += taskbarStylePositioner + taskbarStyle;
-
+    // remove button
     const removeWidget = document.createElement("button");
     removeWidget.innerHTML = "Remove";
     removeWidget.onclick = () => {
@@ -167,13 +187,9 @@ const openTaskBar = (wrapper, widget, widgetObject, isClone) => {
       wrapper.remove();
       console.log(widgetObject);
     };
+    removeWidget.style.cssText += taskBarButtonStyle;
     taskbar.append(removeWidget);
-
-    const closeButton = document.createElement("button");
-    closeButton.innerHTML = "Close";
-    closeButton.onclick = () => (taskbar.style.display = "none");
-    taskbar.append(closeButton);
-
+    // scroll back button
     const scrollBack = document.createElement("button");
     scrollBack.innerHTML = "Scroll";
     scrollBack.onclick = () => {
@@ -184,17 +200,24 @@ const openTaskBar = (wrapper, widget, widgetObject, isClone) => {
         inline: "nearest",
       });
     };
+    scrollBack.style.cssText += taskBarButtonStyle;
     taskbar.append(scrollBack);
+    // close button
+    const closeButton = document.createElement("button");
+    closeButton.innerHTML = "Close";
+    closeButton.onclick = () => (taskbar.style.display = "none");
+    closeButton.style.cssText += taskBarButtonStyle;
+    taskbar.append(closeButton);
   } else {
     let taskbarElement;
-    let wrapperArray = [...wrapper.children]
+    let wrapperArray = [...wrapper.children];
     wrapperArray.forEach((element) => {
       if (element.getAttribute("taskbar")) {
         taskbarElement = element;
       }
     });
-    taskbarElement.style.display = "block";
-    console.log(taskbarElement)
+    taskbarElement.style.display = "flex";
+    console.log(taskbarElement);
   }
 };
 const cloneWidget = (widget, widgetObject) => {

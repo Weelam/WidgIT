@@ -4,8 +4,20 @@
   height: 100px;
 }
 
-html, body {
+html,
+body {
   position: relative;
+}
+
+.widgit-taskbar button {
+  background: none;
+  border-style: none;
+  color: white;
+  padding: .5rem .5rem;
+}
+
+.widgit-taskbar button:hover {
+  background-color: #B7B7B7 !important;
 }
 
 @-webkit-keyframes begindrag {
@@ -39,6 +51,24 @@ html, body {
     -webkit-transform: scale(1);
             transform: scale(1);
     background-color: red;
+  }
+}
+
+@-webkit-keyframes slide {
+  100% {
+    left: 0;
+  }
+}
+
+@keyframes slide {
+  100% {
+    left: 0;
+  }
+}
+
+@keyframes slide {
+  100% {
+    left: 0;
   }
 }
 /*# sourceMappingURL=style.css.map */
