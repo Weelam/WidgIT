@@ -12,13 +12,14 @@ const widgetStyle = `
   border-radius: 10px;
   z-index: 10;
   box-shadow: 0 0 3px black;
+  margin: 0;
 ` 
 const resizerStyle = `
 	position: absolute;
 	background-color: transparent;
 	z-index: 999999999999999;
-	width: 15px;
-	height: 15px;
+	width: 1.4rem;
+	height: 1.4rem;
 `;
 
 const resizerStyle_nw = `
@@ -35,14 +36,14 @@ const resizerStyle_ne = `
 
 const resizerStyle_sw = `
 	cursor: sw-resize;
-	bottom: -13px;
+	bottom: 0px;
 	left: 0px;
 
 `;
 
 const resizerStyle_se = `
 	cursor: se-resize;
-	bottom: -13px;
+	bottom: 0px;
 	right: 0px;
 
 `;
