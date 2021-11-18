@@ -10,6 +10,7 @@ const wrapperStyleDragging = `
 `
 
 const widgetStyle = `
+  background-color: #F8F5F2;
   border-radius: 10px;
   z-index: 10;
   box-shadow: 0 0 3px black;

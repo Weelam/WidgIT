@@ -9,145 +9,157 @@
 
 <!DOCTYPE html>
 <html lang="en">
- 
- <head>
- 	<meta charset="utf-8">
+  <head>
+    <meta charset="utf-8" />
     <title>Exercise 1: Twitter Layout</title>
-    <link rel="stylesheet" type="text/css" href="./e1/e1_style.css">
-	<link rel="stylesheet" href="./style.css" />
-	<!-- widgit.js put be loaded in last!!!! -->
-	<script src="./example.js" defer></script>
-	<script src="./widgit.js" defer></script>
- </head>
+    <link rel="stylesheet" type="text/css" href="exampleStyles.css" />
+    <!-- the styles necessary for the library -->
+    <link rel="stylesheet" href="./style.css" />
+    <!-- widgit.js put be loaded in last!!!! -->
+    <script src="./example.js" defer></script>
+    <script src="./widgit.js" defer></script>
+  </head>
 
- <body>
- 	
-	<!-- big image profile -->
+  <body>
+    <div class="root-container">
+      <div class="header">
+        <h1>Low Quality Article</h1>
+        <div class="author-date">
+          <p>By Giorno Giovanna - Fake news</p>
+          <p>Posted 4/20/2069</p>
+        </div>
+      </div>
+      <img class="main-image" src="./media/cookout.jpg" />
+      <p class="other-widgets">
+        Yo what is up fortnite gamers it's asiantrollerz here welcome back to
+        another brand new gaemplay. Todday we are playing the scout. Elit
+        aliquip reprehenderit id et sit voluptate pariatur anim. Amet sit
+        reprehenderit tempor nulla in. Lorem commodo aliquip consectetur ut
+        aliquip commodo tempor. Exercitation reprehenderit anim incididunt
+        pariatur ex reprehenderit aliquip ullamco laboris incididunt aute amet
+        exercitation qui. Exercitation in nulla voluptate proident deserunt
+        magna nisi fugiat ipsum est.
+      </p>
+      <div>
+        <h2>"I, Giorno Giovanna, have a dream"</h2>
+        <img src="./media/green_stand.jpg" />
+        <img src="./media/star_platinum.jpg" />
+        <p class="other-widgets">
+          My name is Yoshikage Kira. I’m 33 years old. My house is in the
+          northeast section of Morioh, where all the villas are, and I am not
+          married. I work as an employee for the Kame Yu department stores, and
+          I get home every day by 8 PM at the latest. I don’t smoke, but I
+          occasionally drink. I’m in bed by 11 PM, and make sure I get eight
+          hours of sleep, no matter what. After having a glass of warm milk and
+          doing about twenty minutes of stretches before going to bed, I usually
+          have no problems sleeping until morning. Just like a baby, I wake up
+          without any fatigue or stress in the morning. I was told there were no
+          issues at my last check-up. I’m trying to explain that I’m a person
+          who wishes to live a very quiet life. I take care not to trouble
+          myself with any enemies, like winning and losing, that would cause me
+          to lose sleep at night. That is how I deal with society, and I know
+          that is what brings me happiness. Although, if I were to fight I
+          wouldn’t lose to anyone.
+        </p>
+      </div>
+      <div>
+        <h2 >
+          You've been scrolling for a long time (probably like 1 min). Stop here
+          for a bit and vibe with this raccoon.
+        </h2>
+        <video width="100%" height="400px" controls>
+          <source src="media/raccoon_vibing.mp4" type="video/mp4" />
+        </video>
+      </div>
 
+      <div>
+        <h2>
+          You've been scrolling for a long time again. But it's ok, I've prepared 2 videos this
+          time.
+        </h2>
+        <div class="vid-break-2">
+					<video width="50%" height="400px" controls>
+						<source
+							src="media/frog-vibbing.mp4"
+							type="video/mp4"
+						/>
+					</video>
+          <video width="50%" height="400px" controls>
+            <source
+              src="media/kill_trips_and_almost_dies.mp4"
+              type="video/mp4"
+            />
+          </video>
+        </div>
+      </div>
 
- 	<!-- The header -->
- 	<div id="header">
- 		<!-- Twitter logo goes in here -->
-		 <div >
-			 <img class="birdLogo" src="./e1/bird.png" />
-		 </div>
- 		
- 	</div>
+      <div>
+        <h2>More random text accompanied by a random pictures</h2>
 
-	 <img src="./e1/uoft.jpg" id="bigProfilePicCircle"/>
+        <p class="other-widgets"> 
+          Consequat consectetur Lorem ea pariatur ut irure aute. Culpa cillum laboris commodo laborum ad nostrud. Mollit ut incididunt labore ea aliqua officia eu officia ipsum consequat non nulla elit. Sint eiusmod consectetur aliqua amet fugiat ad sint nostrud dolore labore excepteur. Ut magna mollit est id veniam velit minim cillum. Sit ex qui pariatur exercitation dolore sunt. Quis fugiat amet consectetur dolor pariatur incididunt irure labore commodo laboris ipsum.
 
-	<!-- The big banner image -->
- 	<div id="banner"> <!-- Just holds the banner image, don't need to style this div. -->
-
- 		<!-- Banner image goes in here -->
- 		 		<!-- Twitter logo goes in here -->
-			<div >
-				<img class="bannerPic" src="./e1/uoft_banner.jpeg"/>
-			</div>
-
- 	</div>
-
- 	<div id="profileStats">
- 		<ul>
- 			<!-- Style the list element: Label and number -->
- 			<li>Tweets<br><span class="profileStatsNumber">478</span></li> 
-			<li>Followers<br><span class="profileStatsNumber">23K</span></li> 
-
-			<li>Following<br><span class="profileStatsNumber">12</span></li> 
-			<li>Likes<br><span class="profileStatsNumber">10.3K</span></li> 
-
-
-
- 			<!-- Add the rest of the stats below -->
-
-
- 		</ul>
- 	</div>
-
- 	<!-- The Profile Info Section -->
- 	<div id="profileInfo">
- 		<h2>University of Toronto</h2>
- 		<p class="grey">@UofT</p>
- 		<p>
- 			Connect with Canada's top university and one of the world’s strongest academic and research powerhouses. Find the latest news & events @uoftnews. #UofT
-		</p>
- 	</div>
-
-
- 	<!-- The Timeline Section -->
- 	<div id='timeline'>
-
- 		<div class='timelineHeader'>
- 			<ul>
-	 			<li><a class="a" href="">Tweets</a></li>
-	 			<li><a class="a" href="">Tweets & Replies</a></li>
- 			</ul>
- 		</div>
-
- 		<!-- First tweet -->
- 		<div class='tweet'>
- 			<!-- Put the tweet icon and content in this div.
- 			You should have two divs inside this div: one that is a container for the tweet icon,
- 			and one that has the content of the tweet.
- 			Remember to look in the starter CSS for appropriate class names that 
- 			match these descriptions. -->
-			 <div class="tweetIconContainer">
-				<img class="tweetIcon" src="./e1/uoft.jpg"/>
-			 </div>
-
-			 <div class="tweetContent"> 
-				 <div>	
-					 <h3> University of Todfronto <span class="grey"> @UofT </span></h3> 
-
-				 </div>
-				 <div>
-						Another great day at UofT! <span class="hashtag"> #UofT #GreatDay </span>
-				 </div>
-			 </div>
-
- 		</div>
-
- 		<!-- Second tweet -->
- 		<div class='tweet'>
- 			<!-- Reuse all of the tweet classes from the one above, 
- 			and just change the content of the tweet. -->
-			 <div class="tweetIconContainer">
-				<img class="tweetIcon" src="./e1/uoft.jpg"/>
-			 </div>
-			 <div class="tweetContent"> 
-				<div>	
-					<h3> University of Toronto <span class="grey"> @UofT </span></h3> 
+					Tempor enim incididunt nulla sint enim. Magna enim sit esse excepteur dolor. Velit sit sint ea eiusmod tempor irure. Incididunt ad sunt culpa exercitation laborum.
+        </p>
+				<div class="another-gallery">
+					<img src="./media/final_boss.jpeg"/>
+					<img src="./media/drink_water.jpeg"/>
+					<img src="./media/damn_my_brain.jpeg"/>
+					<img src="./media/big_cat.jpeg"/>
 
 				</div>
-				<div>
-					 Checkout some books at <span class="hashtag"> #robarts </span>
+      </div>
+      <div>
+        <h2>Damn I'm running out of ideas. So here's a text of a cat</h2>
+        <p>Highlight to see it clearly :)</p>
+        <p>
+          ⣿⣿⣿⠟⠛⠛⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⢋⣩⣉⢻ <br />
+          ⣿⣿⣿⠀⣿⣶⣕⣈⠹⠿⠿⠿⠿⠟⠛⣛⢋⣰⠣⣿⣿⠀⣿ <br />
+          ⣿⣿⣿⡀⣿⣿⣿⣧⢻⣿⣶⣷⣿⣿⣿⣿⣿⣿⠿⠶⡝⠀⣿ <br />
+          ⣿⣿⣿⣷⠘⣿⣿⣿⢏⣿⣿⣋⣀⣈⣻⣿⣿⣷⣤⣤⣿⡐⢿ <br />
+          ⣿⣿⣿⣿⣆⢩⣝⣫⣾⣿⣿⣿⣿⡟⠿⠿⠦⠀⠸⠿⣻⣿⡄⢻ <br />
+          ⣿⣿⣿⣿⣿⡄⢻⣿⣿⣿⣿⣿⣿⣿⣿⣶⣶⣾⣿⣿⣿⣿⠇⣼ <br />
+          ⣿⣿⣿⣿⣿⣿⡄⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⣰ <br />
+          ⣿⣿⣿⣿⣿⣿⠇⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢀⣿ <br />
+          ⣿⣿⣿⣿⣿⠏⢰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢸⣿ <br />
+          ⣿⣿⣿⣿⠟⣰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⣿ <br />
+          ⣿⣿⣿⠋⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡄⣿ <br />
+          ⣿⣿⠋⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⢸ <br />
+          ⣿⠏⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢸ ⣿⠏⣼⣿⣿⣿⣿⣿⣿⣿⣿<br />
+        </p>
+      </div>
+			<div>
+				<h2>Okay I'm out of ideas now so i'm just gonna dump the rest of my media files here</h2>
+				<div class="file-dump">
+					<img src="./media/hehe_stupid_kid.jpeg"/>
+					<img src="./media/math_memes.jpeg"/>
+					<video width="50%" height="400px" controls>
+						<source
+						src="media/cat_breakdance.mp4"
+						type="video/mp4"
+            />
+          </video>
+					<video width="50%" height="400px" controls>
+            <source
+              src="media/penguin_turns_into_missle.mp4"
+              type="video/mp4"
+            />
+          </video>
+					<video width="50%" height="400px" controls>
+            <source
+              src="media/kid_bouncing.mp4"
+              type="video/mp4"
+            />
+          </video>
+					<video width="50%" height="400px" controls>
+            <source
+              src="media/ligh_mode.mp4"
+              type="video/mp4"
+            />
+          </video>
 				</div>
-				<img class="tweetContentPicture" src="./e1/robarts.jpg"/>
-			</div> 
- 		</div>
-
-		<!-- Add your own tweet below -->
-		<div class='tweet'>
-			<!-- Reuse all of the tweet classes from the one above, 
-			and just change the content of the tweet. -->
-			<div class="tweetIconContainer">
-			 <img class="tweetIcon" src="./e1/uoft.jpg"/>
 			</div>
-			<div class="tweetContent"> 
-			 <div>	
-				 <h3> University of Toronto <span class="grey"> @UofT </span></h3> 
-
-			 </div>
-			 <div>
-					is it bussin?<span class="hashtag"> #bussin </span>
-					<img class="tweetContentPicture" src="./e1/meme.jpg"/>
-			 </div>
-		 </div> 
-		</div>
-
-
-
-
- 	</div>
- </body>
+			<h1>Thanks for reading. Have a good day.</h1>
+    </div>
+  </body>
 </html>
