@@ -1,4 +1,5 @@
 // e1.tml
+'use strict';
 
 const tweets = document.querySelectorAll(".tweet");
 

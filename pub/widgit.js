@@ -1,3 +1,4 @@
+'use strict';
 // inline styles
 const widgetStyleDragging = `
 	animation: popAnimation 0.8s ease forwards; 
