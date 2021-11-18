@@ -1,12 +1,18 @@
 // inline styles
-const widgetStyle = `
-  border-radius: 10px;
-	animation: begindrag 0.8s ease forwards; 
+const widgetStyleDragging = `
+	animation: popAnimation 0.8s ease forwards; 
 	opacity: 0.5;
-	z-index: 10;
-	box-shadow: 0 0 3px black;
 	`;
 
+const wrapperStyleDragging = `
+  animation: popAnimation-wrapper 0.8s ease forwards; 
+`
+
+const widgetStyle = `
+  border-radius: 10px;
+  z-index: 10;
+  box-shadow: 0 0 3px black;
+` 
 const resizerStyle = `
 	position: absolute;
 	background-color: transparent;
@@ -46,18 +52,20 @@ const taskbarStylePositioner = `
 	width: 100%;
 	z-index: 99999999999;
 `;
+
 const taskbarStyle = `
   height: auto;
   position: absolute;
   width: 40%;
   z-index: 2147483647;
   top: 0px;
-  right: -45%;
+  right: -42%;
   display: flex;
   flex-direction: column;
   border-radius: 5px;
   overflow: hidden;
-  background: #8E8E8E;
+  background: #5E6973;
+  animation: popAnimation 0.8s ease forwards; 
 `;
 
 const taskBarButtonStyle = `
@@ -111,7 +119,9 @@ const handleMouseDown = (e, widget, widgetObject) => {
       openTaskBar(wrapper, widget, widgetObject, isClone);
 
       // add widget styles
-      widget.style.cssText += widgetStyle;
+      // widget.classList.add("widgit-dragging")
+      widget.style.cssText += widgetStyle + widgetStyleDragging;
+      wrapper.style.cssText += wrapperStyleDragging;
       widget.setAttribute("draggable", false);
       widget.style.cursor = "move";
       // add wrapper styles
@@ -120,7 +130,6 @@ const handleMouseDown = (e, widget, widgetObject) => {
       // this only happens when we mouse down
       let x1 = e.clientX;
       let y1 = e.clientY;
-      // console.log("x1", x1, "y1", y1);
 
       const handleMouseMove = (e) => {
         let x2 = e.clientX - x1;
@@ -157,7 +166,7 @@ const handleMouseDown = (e, widget, widgetObject) => {
       const handleMouseUp = () => {
         window.removeEventListener("mousemove", handleMouseMove);
         window.removeEventListener("mouseup", handleMouseUp);
-        // widget.classList.remove("widgit-dragging");
+        widget.classList.remove("widgit-dragging");
         widget.style.opacity = null;
         widget.style.animation = null;
       };
@@ -225,7 +234,6 @@ const cloneWidget = (widget, widgetObject) => {
   const parentNode = widget.parentNode;
   let widgetClone = widget.cloneNode(true);
   widgetClone.classList.add("widgit-widget");
-  widgetClone.classList.add("box");
   widgetClone.setAttribute("clone", true);
   parentNode.append(widgetClone);
 

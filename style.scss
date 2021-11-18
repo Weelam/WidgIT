@@ -1,3 +1,5 @@
+$popColor: #848F9A;
+
 .box {
   background: red;
   width: 100px;
@@ -16,18 +18,24 @@ body {
     color: white;
     padding: .5rem .5rem;
     &:hover {
-      background-color: #B7B7B7 !important;
+      background-color: #848F9A !important;
     }
   }
 }
 
+// .widgit-widget { 
+//   border-radius: 10px;
+//   z-index: 10;
+//   box-shadow: 0 0 3px black;
+// }
+
 .widgit-dragging {
-  // opacity: 0.5 !important;
-  // animation: begindrag 0.8s ease forwards;
-  // transform-origin: center;
+	animation: popAnimation 0.8s ease forwards; 
+	opacity: 0.5;
+	
 }
 
-@keyframes begindrag {
+@keyframes popAnimation {
   0% {
     transform: scale(1);
     // background-color: blue;
@@ -36,12 +44,35 @@ body {
   10% {
     // transform: rotate(0.5turn);
     transform: scale(1.1);
-    background-color: blue;
+    background-color: $popColor;
   }
 
-  50% {
-    transform: scale(1);
-    background-color: red;
+
+  20% {
+    transform: scale(1.05);
+    background-color: inherit;
+  }
+  100% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes popAnimation-wrapper {
+  0% {
+    // background-color: blue;
+  }
+
+  10% {
+    // transform: rotate(0.5turn);
+    background-color: $popColor;
+  }
+
+
+  20% {
+  }
+  100% {
+    // transform: rotate(0.5turn);
+    // background-color: blue;
   }
 }
 

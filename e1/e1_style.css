@@ -181,7 +181,7 @@ a {
 /* For pictures inside tweets (like the Robarts pic) */
 .tweetContentPicture {
 	/* Add properties below */
-	max-width: 500px;
+	max-width: 100%;
 	margin: 10px 0;
 }
 

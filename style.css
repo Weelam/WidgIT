@@ -17,10 +17,16 @@ body {
 }
 
 .widgit-taskbar button:hover {
-  background-color: #B7B7B7 !important;
+  background-color: #848F9A !important;
 }
 
-@-webkit-keyframes begindrag {
+.widgit-dragging {
+  -webkit-animation: popAnimation 0.8s ease forwards;
+          animation: popAnimation 0.8s ease forwards;
+  opacity: 0.5;
+}
+
+@-webkit-keyframes popAnimation {
   0% {
     -webkit-transform: scale(1);
             transform: scale(1);
@@ -28,16 +34,20 @@ body {
   10% {
     -webkit-transform: scale(1.1);
             transform: scale(1.1);
-    background-color: blue;
+    background-color: #848F9A;
   }
-  50% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-    background-color: red;
+  20% {
+    -webkit-transform: scale(1.05);
+            transform: scale(1.05);
+    background-color: inherit;
+  }
+  100% {
+    -webkit-transform: scale(1.05);
+            transform: scale(1.05);
   }
 }
 
-@keyframes begindrag {
+@keyframes popAnimation {
   0% {
     -webkit-transform: scale(1);
             transform: scale(1);
@@ -45,12 +55,40 @@ body {
   10% {
     -webkit-transform: scale(1.1);
             transform: scale(1.1);
-    background-color: blue;
+    background-color: #848F9A;
   }
-  50% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-    background-color: red;
+  20% {
+    -webkit-transform: scale(1.05);
+            transform: scale(1.05);
+    background-color: inherit;
+  }
+  100% {
+    -webkit-transform: scale(1.05);
+            transform: scale(1.05);
+  }
+}
+
+@-webkit-keyframes popAnimation-wrapper {
+  0% {
+  }
+  10% {
+    background-color: #848F9A;
+  }
+  20% {
+  }
+  100% {
+  }
+}
+
+@keyframes popAnimation-wrapper {
+  0% {
+  }
+  10% {
+    background-color: #848F9A;
+  }
+  20% {
+  }
+  100% {
   }
 }
 
