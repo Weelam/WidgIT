@@ -284,7 +284,7 @@ const handleResizer = (widget, resizeNodes) => {
   const wrapper = widget.parentNode;
   resizeNodes.forEach((node) => {
     const handleResizeMouseDown = (e) => {
-      currentResizer = e.target;
+      let currentResizer = e.target;
       resizing = true;
       let x1 = e.clientX;
       let y1 = e.clientY;
