@@ -23,16 +23,26 @@ body {
   }
 }
 
-// .widgit-widget { 
-//   border-radius: 10px;
-//   z-index: 10;
-//   box-shadow: 0 0 3px black;
-// }
+.widgit-removeWidget {
+  animation: popAnimation-remove 0.8s ease forwards;
+  height: 0px;//or anything you need
+  transition: height 1s;
+}
 
 .widgit-dragging {
 	animation: popAnimation 0.8s ease forwards; 
 	opacity: 0.5;
-	
+}
+
+@keyframes popAnimation-remove {
+  0% {
+    transform: scale(1);
+    opacity: 0.2
+  }
+
+  100% {
+    transform: scale(0);
+  }
 }
 
 @keyframes popAnimation {

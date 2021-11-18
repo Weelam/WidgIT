@@ -75,6 +75,11 @@ const taskBarButtonStyle = `
   padding: .5rem .5rem;
 `;
 
+const removeWidgetStyle = ` 
+  animation: popAnimation-remove 0.3s ease forwards; 
+
+`
+
 // actual code
 const widgets = document.querySelectorAll(".widgit-widget");
 console.log(widgets);
@@ -178,6 +183,20 @@ const handleMouseDown = (e, widget, widgetObject) => {
 };
 
 // helper functions
+const handleRemoveWidget = (wrapper, widget, widgetObject, taskbar) => {
+  // applay the animation and then remove
+  console.log("handleRemoveWidget")
+  wrapper.style.animation = null;
+  widget.style.cssText += removeWidgetStyle; 
+  taskbar.style.cssText += removeWidgetStyle;
+  wrapper.addEventListener("animationend", () => {
+    console.log("animation end of remove")
+    const index = widgetObject["clones"].indexOf(widget);
+    widgetObject["clones"].splice(index, 1);
+    wrapper.remove();
+  })
+}
+
 const openTaskBar = (wrapper, widget, widgetObject, isClone) => {
   if (!isClone) {
     // create taskbar
@@ -191,13 +210,11 @@ const openTaskBar = (wrapper, widget, widgetObject, isClone) => {
     const removeWidget = document.createElement("button");
     removeWidget.innerHTML = "Remove";
     removeWidget.onclick = () => {
-      const index = widgetObject["clones"].indexOf(widget);
-      widgetObject["clones"].splice(index, 1);
-      wrapper.remove();
-      console.log(widgetObject);
+      handleRemoveWidget(wrapper, widget, widgetObject, taskbar)
     };
     removeWidget.style.cssText += taskBarButtonStyle;
     taskbar.append(removeWidget);
+
     // scroll back button
     const scrollBack = document.createElement("button");
     scrollBack.innerHTML = "Scroll";
@@ -229,6 +246,7 @@ const openTaskBar = (wrapper, widget, widgetObject, isClone) => {
     console.log(taskbarElement);
   }
 };
+
 const cloneWidget = (widget, widgetObject) => {
   // clone node
   const parentNode = widget.parentNode;

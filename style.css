@@ -20,10 +20,42 @@ body {
   background-color: #848F9A !important;
 }
 
+.widgit-removeWidget {
+  -webkit-animation: popAnimation-remove 0.8s ease forwards;
+          animation: popAnimation-remove 0.8s ease forwards;
+  height: 0px;
+  -webkit-transition: height 1s;
+  transition: height 1s;
+}
+
 .widgit-dragging {
   -webkit-animation: popAnimation 0.8s ease forwards;
           animation: popAnimation 0.8s ease forwards;
   opacity: 0.5;
+}
+
+@-webkit-keyframes popAnimation-remove {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    opacity: 0.2;
+  }
+  100% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+}
+
+@keyframes popAnimation-remove {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    opacity: 0.2;
+  }
+  100% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
 }
 
 @-webkit-keyframes popAnimation {
