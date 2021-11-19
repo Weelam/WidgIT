@@ -29,4 +29,9 @@ img {
   width: 25%;
   height: auto;
 }
+
+.widgit-widget:hover {
+  opacity: 0.8;
+  background: #ddd;
+}
 /*# sourceMappingURL=exampleStyles.css.map */

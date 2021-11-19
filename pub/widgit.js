@@ -83,28 +83,29 @@ const removeWidgetStyle = `
 
 `
 
-// actual code
-const widgets = document.querySelectorAll(".widgit-widget");
-console.log(widgets);
-let resizing = false;
-const resizes = ["widgit-se", "widgit-sw", "widgit-ne", "widgit-nw"];
-let timeout_id;
-
+// actual code -----------------------------------------------------------------------------------------------
 // [{widget: ... clone:[...]}] -> stores widget objects
 let widgetObjects = [];
+let timeout_id;
+let resizing = false;
+const resizes = ["widgit-se", "widgit-sw", "widgit-ne", "widgit-nw"];
 
-// instantiate all objects into widgetObjects
-widgets.forEach((widget, index) => {
+
+// instantiate the widget object and add it to widgetObjects array
+const createWidget = (widget) => {
   let newObj = {
-    id: index,
+    id: widgetObjects.length,
     original: widget,
     clones: [],
   };
   widgetObjects.push(newObj);
-});
-console.log(widgetObjects);
+  console.log(widgetObjects);
 
-widgetObjects.forEach((widgetObject) => {
+  // add event listeners
+  setupWidget(newObj)
+}
+
+const setupWidget = (widgetObject) => {
   const widget = widgetObject["original"];
   // when mouse is down
   widget.addEventListener("mousedown", (e) =>
@@ -114,8 +115,7 @@ widgetObjects.forEach((widgetObject) => {
   // reset widget timeout
   widget.addEventListener("mouseup", () => resetTimeout(timeout_id));
   widget.addEventListener("mouseleave", () => resetTimeout(timeout_id));
-});
-
+};
 
 const handleMouseDown = (e, widget, widgetObject) => {
   console.log(e.target)
@@ -131,7 +131,6 @@ const handleMouseDown = (e, widget, widgetObject) => {
       openTaskBar(wrapper, widget, widgetObject, isClone);
 
       // add widget styles
-      // widget.classList.add("widgit-dragging")
       widget.style.cssText += widgetStyle + widgetStyleDragging;
       wrapper.style.cssText += wrapperStyleDragging;
       widget.setAttribute("draggable", false);
@@ -205,7 +204,7 @@ const openTaskBar = (wrapper, widget, widgetObject, isClone) => {
     taskbar.style.cssText += taskbarStylePositioner + taskbarStyle;
     // remove button
     const removeWidget = document.createElement("button");
-    removeWidget.innerHTML = "Remove";
+    removeWidget.innerHTML = "Remove widget";
     removeWidget.onclick = () => {
       handleRemoveWidget(wrapper, widget, widgetObject, taskbar)
     };
@@ -214,9 +213,8 @@ const openTaskBar = (wrapper, widget, widgetObject, isClone) => {
 
     // scroll back button
     const scrollBack = document.createElement("button");
-    scrollBack.innerHTML = "Scroll";
+    scrollBack.innerHTML = "Scroll to widget";
     scrollBack.onclick = () => {
-      // console.log(originalWidget)
       originalWidget.scrollIntoView({
         behavior: "smooth",
         block: "end",
@@ -227,7 +225,7 @@ const openTaskBar = (wrapper, widget, widgetObject, isClone) => {
     taskbar.append(scrollBack);
     // close button
     const closeButton = document.createElement("button");
-    closeButton.innerHTML = "Close";
+    closeButton.innerHTML = "Close menu";
     closeButton.onclick = () => (taskbar.style.display = "none");
     closeButton.style.cssText += taskBarButtonStyle;
     taskbar.append(closeButton);
@@ -248,8 +246,8 @@ const cloneWidget = (widget, widgetObject) => {
   const bodyNode = document.getElementsByTagName('body')[0]
   // clone node
   let widgetClone = widget.cloneNode(true);
-  widgetClone.classList.add("widgit-widget");
   widgetClone.setAttribute("clone", true);
+  widgetClone.classList.remove("widgit-widget")
   bodyNode.append(widgetClone);
 
   // wrap clone inside div
@@ -368,12 +366,3 @@ const addResizer = (widget) => {
 const resetTimeout = (timeout_id) => {
   clearTimeout(timeout_id);
 };
-
-// const updateWidgetclones = () => {
-//   let newObj = {
-//     id: index,
-//     original: widget,
-//     clones: []
-//   }
-//   widgetObjects.push(newObj)
-// }
