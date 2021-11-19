@@ -59,10 +59,10 @@ const taskbarStylePositioner = `
 const taskbarStyle = `
   height: auto;
   position: absolute;
-  width: 40%;
+  width: 100px;
   z-index: 2147483647;
   top: 0px;
-  right: -42%;
+  right: -110px;
   display: flex;
   flex-direction: column;
   border-radius: 5px;
