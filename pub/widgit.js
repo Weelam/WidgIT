@@ -174,7 +174,7 @@ const handleMouseDown = (e, widget, widgetObject) => {
 
       window.addEventListener("mousemove", handleMouseMove);
       window.addEventListener("mouseup", handleMouseUp);
-    }, 1000);
+    }, 800);
   }
 };
 
