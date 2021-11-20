@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 // inline styles
 const widgetStyleDragging = `
 	animation: popAnimation 0.8s ease forwards; 
@@ -7,7 +7,7 @@ const widgetStyleDragging = `
 
 const wrapperStyleDragging = `
   animation: popAnimation-wrapper 0.8s ease forwards; 
-`
+`;
 
 const widgetStyle = `
   background-color: #F8F5F2;
@@ -15,7 +15,7 @@ const widgetStyle = `
   z-index: 10;
   box-shadow: 0 0 3px black;
   margin: 0;
-` 
+`;
 const resizerStyle = `
 	position: absolute;
 	background-color: transparent;
@@ -81,29 +81,41 @@ const taskBarButtonStyle = `
 const removeWidgetStyle = ` 
   animation: popAnimation-remove 0.3s ease forwards; 
 
-`
+`;
 
 // actual code -----------------------------------------------------------------------------------------------
-// [{widget: ... clone:[...]}] -> stores widget objects
+// [{id:, widget: ..., widgetClass: ,clone:[...]}] -> stores widget objects
 let widgetObjects = [];
 let timeout_id;
 let resizing = false;
 const resizes = ["widgit-se", "widgit-sw", "widgit-ne", "widgit-nw"];
 
+// set widget "identity". This will let the user know which element is "widgetable".
+const setWidgetIdentity = (widget, className) => {
+  console.log("setting widget identity")
+  widgetObjects.forEach((widgetObject) => {
+    if (widgetObject["original"] === widget) {
+      widget.classList.add(className);
+      widgetObject["widgetClass"] = className
+    }
+  });
+};
 
 // instantiate the widget object and add it to widgetObjects array
 const createWidget = (widget) => {
   let newObj = {
     id: widgetObjects.length,
     original: widget,
+    widgetClass: "",
     clones: [],
   };
   widgetObjects.push(newObj);
   console.log(widgetObjects);
 
   // add event listeners
-  setupWidget(newObj)
-}
+  setupWidget(newObj);
+
+};
 
 const setupWidget = (widgetObject) => {
   const widget = widgetObject["original"];
@@ -118,7 +130,7 @@ const setupWidget = (widgetObject) => {
 };
 
 const handleMouseDown = (e, widget, widgetObject) => {
-  console.log(e.target)
+  console.log(e.target);
   if (!resizing) {
     timeout_id = setTimeout(() => {
       const isClone = widget.getAttribute("clone");
@@ -181,17 +193,17 @@ const handleMouseDown = (e, widget, widgetObject) => {
 // helper functions
 const handleRemoveWidget = (wrapper, widget, widgetObject, taskbar) => {
   // applay the animation and then remove
-  console.log("handleRemoveWidget")
+  console.log("handleRemoveWidget");
   wrapper.style.animation = null;
-  widget.style.cssText += removeWidgetStyle; 
+  widget.style.cssText += removeWidgetStyle;
   taskbar.style.cssText += removeWidgetStyle;
   wrapper.addEventListener("animationend", () => {
-    console.log("animation end of remove")
+    console.log("animation end of remove");
     const index = widgetObject["clones"].indexOf(widget);
     widgetObject["clones"].splice(index, 1);
     wrapper.remove();
-  })
-}
+  });
+};
 
 const openTaskBar = (wrapper, widget, widgetObject, isClone) => {
   if (!isClone) {
@@ -206,7 +218,7 @@ const openTaskBar = (wrapper, widget, widgetObject, isClone) => {
     const removeWidget = document.createElement("button");
     removeWidget.innerHTML = "Remove widget";
     removeWidget.onclick = () => {
-      handleRemoveWidget(wrapper, widget, widgetObject, taskbar)
+      handleRemoveWidget(wrapper, widget, widgetObject, taskbar);
     };
     removeWidget.style.cssText += taskBarButtonStyle;
     taskbar.append(removeWidget);
@@ -243,11 +255,12 @@ const openTaskBar = (wrapper, widget, widgetObject, isClone) => {
 };
 
 const cloneWidget = (widget, widgetObject) => {
-  const bodyNode = document.getElementsByTagName('body')[0]
+  console.log("clone widget")
+  const bodyNode = document.getElementsByTagName("body")[0];
   // clone node
   let widgetClone = widget.cloneNode(true);
   widgetClone.setAttribute("clone", true);
-  widgetClone.classList.remove("widgit-widget")
+  widgetClone.classList.remove(widgetObject["widgetClass"]) // this is to remove the identifier class for the original element
   bodyNode.append(widgetClone);
 
   // wrap clone inside div
@@ -260,7 +273,6 @@ const cloneWidget = (widget, widgetObject) => {
   );
 
   widgetObject["clones"].push(widgetClone);
-  console.log(widgetObject);
 
   // reset widget timeout
   widgetClone.addEventListener("mouseup", () => resetTimeout(timeout_id));
