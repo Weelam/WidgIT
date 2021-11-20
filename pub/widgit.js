@@ -84,7 +84,7 @@ const removeWidgetStyle = `
 `;
 
 // actual code -----------------------------------------------------------------------------------------------
-// [{id:, widget: ..., widgetClass: ,clone:[...]}] -> stores widget objects
+// [{widget: ..., widgetIdentifierClass: ,clone:[...]}] -> stores widget objects
 let widgetObjects = [];
 let timeout_id;
 let resizing = false;
@@ -96,7 +96,7 @@ const setWidgetIdentity = (widget, className) => {
   widgetObjects.forEach((widgetObject) => {
     if (widgetObject["original"] === widget) {
       widget.classList.add(className);
-      widgetObject["widgetClass"] = className
+      widgetObject["widgetIdentifierClass"] = className
     }
   });
 };
@@ -104,10 +104,9 @@ const setWidgetIdentity = (widget, className) => {
 // instantiate the widget object and add it to widgetObjects array
 const createWidget = (widget) => {
   let newObj = {
-    id: widgetObjects.length,
     original: widget,
-    widgetClass: "",
-    clones: [],
+    widgetIdentifierClass: "",
+    clones: []
   };
   widgetObjects.push(newObj);
   console.log(widgetObjects);
@@ -260,7 +259,7 @@ const cloneWidget = (widget, widgetObject) => {
   // clone node
   let widgetClone = widget.cloneNode(true);
   widgetClone.setAttribute("clone", true);
-  widgetClone.classList.remove(widgetObject["widgetClass"]) // this is to remove the identifier class for the original element
+  widgetClone.classList.remove(widgetObject["widgetIdentifierClass"]) // this is to remove the identifier class for the original element
   bodyNode.append(widgetClone);
 
   // wrap clone inside div
