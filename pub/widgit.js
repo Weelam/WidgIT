@@ -1,5 +1,5 @@
 "use strict";
-// inline styles
+// inline styles, since they have higher priority
 const widgetStyleDragging = `
 	animation: popAnimation 0.8s ease forwards; 
 	opacity: 0.5;
@@ -92,11 +92,11 @@ const resizes = ["widgit-se", "widgit-sw", "widgit-ne", "widgit-nw"];
 
 // set widget "identity". This will let the user know which element is "widgetable".
 const setWidgetIdentity = (widget, className) => {
-  console.log("setting widget identity")
+  console.log("setting widget identity");
   widgetObjects.forEach((widgetObject) => {
     if (widgetObject["original"] === widget) {
       widget.classList.add(className);
-      widgetObject["widgetIdentifierClass"] = className
+      widgetObject["widgetIdentifierClass"] = className;
     }
   });
 };
@@ -106,14 +106,13 @@ const createWidget = (widget) => {
   let newObj = {
     original: widget,
     widgetIdentifierClass: "",
-    clones: []
+    clones: [],
   };
   widgetObjects.push(newObj);
   console.log(widgetObjects);
 
   // add event listeners
   setupWidget(newObj);
-
 };
 
 const setupWidget = (widgetObject) => {
@@ -251,15 +250,16 @@ const openTaskBar = (wrapper, widget, widgetObject, isClone) => {
     taskbarElement.style.display = "flex";
     console.log(taskbarElement);
   }
+  addBorderBox();
 };
 
 const cloneWidget = (widget, widgetObject) => {
-  console.log("clone widget")
+  console.log("clone widget");
   const bodyNode = document.getElementsByTagName("body")[0];
   // clone node
   let widgetClone = widget.cloneNode(true);
   widgetClone.setAttribute("clone", true);
-  widgetClone.classList.remove(widgetObject["widgetIdentifierClass"]) // this is to remove the identifier class for the original element
+  widgetClone.classList.remove(widgetObject["widgetIdentifierClass"]); // this is to remove the identifier class for the original element
   bodyNode.append(widgetClone);
 
   // wrap clone inside div
@@ -283,59 +283,39 @@ const cloneWidget = (widget, widgetObject) => {
   // and not the widget itself
   widgetClone.style.position = "fixed";
   wrapper.style.position = "fixed";
+  addBorderBox();
   widgetClone.style.top = bounding.top + "px";
   widgetClone.style.left = bounding.left + "px";
   wrapper.style.top = bounding.top + "px";
   wrapper.style.left = bounding.left + "px";
+
+  // wrap all descendnents
+  const descendents = Array.from(widgetClone.getElementsByTagName("*"));
+  addWrapper(descendents);
   return widgetClone;
 };
 
 const handleResizer = (widget, resizeNodes) => {
   const wrapper = widget.parentNode;
+  wrapper.style.border = "solid 1px black";
   resizeNodes.forEach((node) => {
     const handleResizeMouseDown = (e) => {
       let currentResizer = e.target;
       resizing = true;
       let x1 = e.clientX;
       let y1 = e.clientY;
-
+      // loop through every single descendent and apply the style
+      const descendents = Array.from(wrapper.getElementsByTagName("*"));
+      console.log(descendents);
       const handleResizeMouseMove = (e) => {
-        const bounding = wrapper.getBoundingClientRect();
-        const x2 = e.clientX - x1;
-        const y2 = e.clientY - y1;
-
-        // before we introduced the idea of positioning relative to a wrapper, resizing was weird
-        // now that we have a wrapper, it's good (must also update the width and height of the wrapper the same way as widget too)
-        if (currentResizer.getAttribute("se")) {
-          widget.style.width = bounding.width + x2 + "px";
-          widget.style.height = bounding.height + y2 + "px";
-          wrapper.style.width = bounding.width + x2 + "px";
-          wrapper.style.height = bounding.height + y2 + "px";
-        } else if (currentResizer.getAttribute("sw")) {
-          widget.style.width = bounding.width - x2 + "px";
-          widget.style.height = bounding.height + y2 + "px";
-          widget.style.left = bounding.left + x2 + "px";
-          wrapper.style.width = bounding.width - x2 + "px";
-          wrapper.style.height = bounding.height + y2 + "px";
-          wrapper.style.left = bounding.left + x2 + "px";
-        } else if (currentResizer.getAttribute("ne")) {
-          widget.style.width = bounding.width + x2 + "px";
-          widget.style.height = bounding.height - y2 + "px";
-          widget.style.top = bounding.top + y2 + "px";
-          wrapper.style.width = bounding.width + x2 + "px";
-          wrapper.style.height = bounding.height - y2 + "px";
-          wrapper.style.top = bounding.top + y2 + "px";
-        } else {
-          widget.style.width = bounding.width - x2 + "px";
-          widget.style.height = bounding.height - y2 + "px";
-          widget.style.top = bounding.top + y2 + "px";
-          widget.style.left = bounding.left + x2 + "px";
-          wrapper.style.width = bounding.width - x2 + "px";
-          wrapper.style.height = bounding.height - y2 + "px";
-          wrapper.style.top = bounding.top + y2 + "px";
-          wrapper.style.left = bounding.left + x2 + "px";
-        }
-
+        descendents.forEach((descendent) => {
+          if (descendent === widget) {
+            resize(widget, currentResizer, x1, y1, e, true);
+          } else {
+            console.log("other element");
+            resize(widget, currentResizer, x1, y1, e, false);
+          }
+        });
         x1 = e.clientX;
         y1 = e.clientY;
       };
@@ -351,6 +331,74 @@ const handleResizer = (widget, resizeNodes) => {
     };
     node.addEventListener("mousedown", handleResizeMouseDown);
   });
+};
+
+const addWrapper = (elements) => {
+  // wraps all elements in a div wrapper (used for all descendents except for the widget itself)
+  elements.forEach((element) => {
+    const wrapper = element.parentNode;
+    const div = document.createElement("div");
+    div.appendChild(element);
+    wrapper.appendChild(div);
+    div.setAttribute("wrapper", true);
+    console.log(element);
+  });
+};
+
+const addBorderBox = () => {
+  // adds border box to all elements
+  const allNodes = document.querySelectorAll("*");
+  allNodes.forEach((node) => {
+    node.style.boxSizing = "border-box";
+  });
+  console.log("border-box added");
+};
+
+const resize = (element, currentResizer, x1, y1, e, isWrapper) => {
+  const wrapper = element.parentNode;
+  const bounding = wrapper.getBoundingClientRect();
+  const x2 = e.clientX - x1;
+  const y2 = e.clientY - y1;
+
+  // before we introduced the idea of positioning relative to a wrapper, resizing was weird
+  // now that we have a wrapper, it's good (must also update the width and height of the wrapper the same way as widget too)
+  if (currentResizer.getAttribute("se")) {
+    element.style.width = bounding.width + x2 + "px";
+    element.style.height = bounding.height + y2 + "px";
+    if (isWrapper) {
+      wrapper.style.width = bounding.width + x2 + "px";
+      wrapper.style.height = bounding.height + y2 + "px";
+    }
+  } else if (currentResizer.getAttribute("sw")) {
+    element.style.width = bounding.width - x2 + "px";
+    element.style.height = bounding.height + y2 + "px";
+    element.style.left = bounding.left + x2 + "px";
+    if (isWrapper) {
+      wrapper.style.width = bounding.width - x2 + "px";
+      wrapper.style.height = bounding.height + y2 + "px";
+      wrapper.style.left = bounding.left + x2 + "px";
+    }
+  } else if (currentResizer.getAttribute("ne")) {
+    element.style.width = bounding.width + x2 + "px";
+    element.style.height = bounding.height - y2 + "px";
+    element.style.top = bounding.top + y2 + "px";
+    if (isWrapper) {
+      wrapper.style.width = bounding.width + x2 + "px";
+      wrapper.style.height = bounding.height - y2 + "px";
+      wrapper.style.top = bounding.top + y2 + "px";
+    }
+  } else {
+    element.style.width = bounding.width - x2 + "px";
+    element.style.height = bounding.height - y2 + "px";
+    element.style.top = bounding.top + y2 + "px";
+    element.style.left = bounding.left + x2 + "px";
+    if (isWrapper) {
+      wrapper.style.width = bounding.width - x2 + "px";
+      wrapper.style.height = bounding.height - y2 + "px";
+      wrapper.style.top = bounding.top + y2 + "px";
+      wrapper.style.left = bounding.left + x2 + "px";
+    }
+  }
 };
 
 const addResizer = (widget) => {
@@ -372,6 +420,8 @@ const addResizer = (widget) => {
 
   wrapper.append(nw, ne, sw, se);
   handleResizer(widget, [nw, ne, sw, se]);
+  addBorderBox();
+  addWrapper([nw, ne, sw, se]);
 };
 
 const resetTimeout = (timeout_id) => {
