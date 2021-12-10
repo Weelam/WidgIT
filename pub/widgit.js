@@ -219,6 +219,7 @@ const openTaskBar = (wrapper, widget, widgetObject, isClone) => {
       handleRemoveWidget(wrapper, widget, widgetObject, taskbar);
     };
     removeWidget.style.cssText += taskBarButtonStyle;
+    removeWidget.setAttribute("taskbar", true);
     taskbar.append(removeWidget);
 
     // scroll back button
@@ -231,6 +232,7 @@ const openTaskBar = (wrapper, widget, widgetObject, isClone) => {
         inline: "nearest",
       });
     };
+    scrollBack.setAttribute("taskbar", true);
     scrollBack.style.cssText += taskBarButtonStyle;
     taskbar.append(scrollBack);
     // close button
@@ -238,6 +240,7 @@ const openTaskBar = (wrapper, widget, widgetObject, isClone) => {
     closeButton.innerHTML = "Close menu";
     closeButton.onclick = () => (taskbar.style.display = "none");
     closeButton.style.cssText += taskBarButtonStyle;
+    closeButton.setAttribute("taskbar", true);
     taskbar.append(closeButton);
   } else {
     let taskbarElement;
@@ -291,7 +294,7 @@ const cloneWidget = (widget, widgetObject) => {
 
   // wrap all descendnents
   const descendents = Array.from(widgetClone.getElementsByTagName("*"));
-  addWrapper(descendents);
+  // addWrapper(descendents);
   return widgetClone;
 };
 
@@ -305,15 +308,16 @@ const handleResizer = (widget, resizeNodes) => {
       let x1 = e.clientX;
       let y1 = e.clientY;
       // loop through every single descendent and apply the style
-      const descendents = Array.from(wrapper.getElementsByTagName("*"));
+      let descendents = Array.from(wrapper.getElementsByTagName("*"));
+      descendents = descendents.filter((descendent) => !descendent.getAttribute("taskbar"));
       console.log(descendents);
       const handleResizeMouseMove = (e) => {
         descendents.forEach((descendent) => {
           if (descendent === widget) {
-            resize(widget, currentResizer, x1, y1, e, true);
+            resize(descendent, currentResizer, x1, y1, e, wrapper);
           } else {
             console.log("other element");
-            resize(widget, currentResizer, x1, y1, e, false);
+            resize(descendent, currentResizer, x1, y1, e, wrapper);
           }
         });
         x1 = e.clientX;
@@ -354,8 +358,8 @@ const addBorderBox = () => {
   console.log("border-box added");
 };
 
-const resize = (element, currentResizer, x1, y1, e, isWrapper) => {
-  const wrapper = element.parentNode;
+const resize = (element, currentResizer, x1, y1, e, wrapper) => {
+  console.log(element);
   const bounding = wrapper.getBoundingClientRect();
   const x2 = e.clientX - x1;
   const y2 = e.clientY - y1;
@@ -365,39 +369,34 @@ const resize = (element, currentResizer, x1, y1, e, isWrapper) => {
   if (currentResizer.getAttribute("se")) {
     element.style.width = bounding.width + x2 + "px";
     element.style.height = bounding.height + y2 + "px";
-    if (isWrapper) {
-      wrapper.style.width = bounding.width + x2 + "px";
-      wrapper.style.height = bounding.height + y2 + "px";
-    }
+
+    wrapper.style.width = bounding.width + x2 + "px";
+    wrapper.style.height = bounding.height + y2 + "px";
   } else if (currentResizer.getAttribute("sw")) {
     element.style.width = bounding.width - x2 + "px";
     element.style.height = bounding.height + y2 + "px";
     element.style.left = bounding.left + x2 + "px";
-    if (isWrapper) {
-      wrapper.style.width = bounding.width - x2 + "px";
-      wrapper.style.height = bounding.height + y2 + "px";
-      wrapper.style.left = bounding.left + x2 + "px";
-    }
+
+    wrapper.style.width = bounding.width - x2 + "px";
+    wrapper.style.height = bounding.height + y2 + "px";
   } else if (currentResizer.getAttribute("ne")) {
     element.style.width = bounding.width + x2 + "px";
     element.style.height = bounding.height - y2 + "px";
     element.style.top = bounding.top + y2 + "px";
-    if (isWrapper) {
-      wrapper.style.width = bounding.width + x2 + "px";
-      wrapper.style.height = bounding.height - y2 + "px";
-      wrapper.style.top = bounding.top + y2 + "px";
-    }
+
+    wrapper.style.width = bounding.width + x2 + "px";
+    wrapper.style.height = bounding.height - y2 + "px";
+    wrapper.style.top = bounding.top + y2 + "px";
   } else {
     element.style.width = bounding.width - x2 + "px";
     element.style.height = bounding.height - y2 + "px";
     element.style.top = bounding.top + y2 + "px";
     element.style.left = bounding.left + x2 + "px";
-    if (isWrapper) {
-      wrapper.style.width = bounding.width - x2 + "px";
-      wrapper.style.height = bounding.height - y2 + "px";
-      wrapper.style.top = bounding.top + y2 + "px";
-      wrapper.style.left = bounding.left + x2 + "px";
-    }
+
+    wrapper.style.width = bounding.width - x2 + "px";
+    wrapper.style.height = bounding.height - y2 + "px";
+    wrapper.style.top = bounding.top + y2 + "px";
+    wrapper.style.left = bounding.left + x2 + "px";
   }
 };
 
@@ -421,7 +420,7 @@ const addResizer = (widget) => {
   wrapper.append(nw, ne, sw, se);
   handleResizer(widget, [nw, ne, sw, se]);
   addBorderBox();
-  addWrapper([nw, ne, sw, se]);
+  // addWrapper([nw, ne, sw, se]);
 };
 
 const resetTimeout = (timeout_id) => {
