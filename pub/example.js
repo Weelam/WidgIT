@@ -1,6 +1,7 @@
 'use strict';
 // all the images and videos are widgets
 const images = document.querySelectorAll(".widgit-img");
+// const images = document.querySelectorAll("img");
 const videos = document.querySelectorAll("video")
 const otherWidgets = document.querySelectorAll(".other-widgets")
 
@@ -15,6 +16,7 @@ images.forEach(image => {
     // setWidgetIdentity(element, className) to set an class that will notify user which element is a widget
     setWidgetIdentity(image, "widgit-widget")
 })
+
 
 videos.forEach(video => {
     createWidget(video)

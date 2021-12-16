@@ -340,6 +340,7 @@ const handleResizer = (widget, resizeNodes) => {
 const addWrapper = (elements) => {
   // wraps all elements in a div wrapper (used for all descendents except for the widget itself)
   elements.forEach((element) => {
+    
     const wrapper = element.parentNode;
     const div = document.createElement("div");
     div.appendChild(element);
@@ -363,7 +364,9 @@ const resize = (element, currentResizer, x1, y1, e, wrapper) => {
   const bounding = wrapper.getBoundingClientRect();
   const x2 = e.clientX - x1;
   const y2 = e.clientY - y1;
-
+  if (element.getAttribute("se") || element.getAttribute("sw") || element.getAttribute("ne") || element.getAttribute("nw") ) {
+    return;
+  }
   // before we introduced the idea of positioning relative to a wrapper, resizing was weird
   // now that we have a wrapper, it's good (must also update the width and height of the wrapper the same way as widget too)
   if (currentResizer.getAttribute("se")) {
@@ -379,6 +382,8 @@ const resize = (element, currentResizer, x1, y1, e, wrapper) => {
 
     wrapper.style.width = bounding.width - x2 + "px";
     wrapper.style.height = bounding.height + y2 + "px";
+    wrapper.style.left = bounding.left + x2 + "px";
+
   } else if (currentResizer.getAttribute("ne")) {
     element.style.width = bounding.width + x2 + "px";
     element.style.height = bounding.height - y2 + "px";
