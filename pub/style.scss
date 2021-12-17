@@ -1,4 +1,4 @@
-$popColor: #848F9A;
+$popColor: #848f9a;
 
 .box {
   background: red;
@@ -16,45 +16,74 @@ body {
     background: none;
     border-style: none;
     color: white;
-    padding: .5rem .5rem;
+    padding: 0.5rem 0.5rem;
     &:hover {
-      background-color: #848F9A !important;
+      background-color: #848f9a !important;
     }
   }
 }
 
 .widgit-removeWidget {
   animation: popAnimation-remove 0.8s ease forwards;
-  height: 0px;//or anything you need
+  height: 0px; //or anything you need
   transition: height 1s;
 }
 
 .widgit-dragging {
-	animation: popAnimation 0.8s ease forwards, jiggle .1s ease-in-out infinite alternate; 
-	opacity: 0.5;
+  animation: popAnimation 0.8s ease forwards,
+    jiggle 0.1s ease-in-out infinite alternate;
+  opacity: 0.5;
 }
 
 .widget-widgitStyle {
-  background-color: #F8F5F2;
+  background-color: #f8f5f2;
   border-radius: 10px;
   z-index: 10;
   box-shadow: 0 0 3px black;
   margin: 0;
   overflow-y: scroll;
-  animation: popAnimation-wrapper 0.8s ease forwards; 
+  animation: popAnimation-wrapper 0.8s ease forwards;
+  //   ::-webkit-scrollbar {
+  //     display: none;
+  // }
+}
 
-//   ::-webkit-scrollbar {
-//     display: none;
-// }
+.widget-expandButtonClass {
+  background: #ddd;
+  &:hover {
+    filter: brightness(110%);
+    // background: blue;
+  }
 }
 
 // animations
+@-webkit-keyframes slideIn {
+  0% {
+    right: 110px;
+    width: 0px;
 
+  }
+  100% {
+    width: 100px;
+    right: -100px;
 
+  }
+}
+@-webkit-keyframes slideOut {
+  0% {
+    width: 100px;
+    right: -100px;
+
+  }
+  100% {
+    right: 110px;
+    width: 0px;
+
+  }
+}
 @keyframes jiggle {
   from {
     -webkit-transform: rotate(1deg);
-
   }
   to {
     -webkit-transform: rotate(-1deg);
@@ -64,7 +93,7 @@ body {
 @keyframes popAnimation-remove {
   0% {
     transform: scale(1);
-    opacity: 0.2
+    opacity: 0.2;
   }
 
   100% {
@@ -84,7 +113,6 @@ body {
     background-color: $popColor;
   }
 
-
   20% {
     transform: scale(1.05);
     background-color: inherit;
@@ -103,7 +131,6 @@ body {
     // transform: rotate(0.5turn);
     background-color: $popColor;
   }
-
 
   20% {
   }

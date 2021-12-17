@@ -65,7 +65,7 @@ const taskbarStyle = `
   height: auto;
   position: absolute;
   width: 100px;
-  z-index: 2147483647;
+  z-index: 1;
   top: 0px;
   right: -110px;
   display: flex;
@@ -73,7 +73,7 @@ const taskbarStyle = `
   border-radius: 5px;
   overflow: hidden;
   background: #5E6973;
-  animation: popAnimation 0.8s ease forwards; 
+  animation: slideIn 1s forwards;
 `;
 
 const taskBarButtonStyle = `
@@ -81,6 +81,10 @@ const taskBarButtonStyle = `
   border-style: none;
   color: white;
   padding: .5rem .5rem;
+`;
+
+const removeTaskBarStyle = `
+  animation: slideOut 1s forwards;
 `;
 
 const removeWidgetStyle = ` 
@@ -100,7 +104,6 @@ const expandButtonStyle = `
 	padding: 0;
 	font: inherit;
 	outline: inherit;
-  
 `;
 
 // actual code -----------------------------------------------------------------------------------------------
@@ -260,7 +263,9 @@ const openTaskBar = (wrapper, widget, widgetObject, setOpen) => {
     // close button
     const closeButton = document.createElement("button");
     closeButton.innerHTML = "Close menu";
-    closeButton.onclick = () => (taskbar.style.display = "none");
+    closeButton.onclick = () => {
+      taskbar.style.cssText += removeTaskBarStyle;
+    };
     closeButton.style.cssText += taskBarButtonStyle;
     closeButton.setAttribute("taskbar", true);
     taskbar.append(closeButton);
@@ -317,6 +322,7 @@ const cloneWidget = (widget, widgetObject) => {
   // add expand button
   const expandButton = document.createElement("button");
   expandButton.style.cssText += expandButtonStyle;
+  expandButton.classList.add("widget-expandButtonClass")
   expandButton.setAttribute("expand", true);
   expandButton.innerHTML= ">";
   expandButton.onclick = () => {

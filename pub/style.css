@@ -13,11 +13,11 @@ body {
   background: none;
   border-style: none;
   color: white;
-  padding: .5rem .5rem;
+  padding: 0.5rem 0.5rem;
 }
 
 .widgit-taskbar button:hover {
-  background-color: #848F9A !important;
+  background-color: #848f9a !important;
 }
 
 .widgit-removeWidget {
@@ -29,13 +29,13 @@ body {
 }
 
 .widgit-dragging {
-  -webkit-animation: popAnimation 0.8s ease forwards, jiggle .1s ease-in-out infinite alternate;
-          animation: popAnimation 0.8s ease forwards, jiggle .1s ease-in-out infinite alternate;
+  -webkit-animation: popAnimation 0.8s ease forwards, jiggle 0.1s ease-in-out infinite alternate;
+          animation: popAnimation 0.8s ease forwards, jiggle 0.1s ease-in-out infinite alternate;
   opacity: 0.5;
 }
 
 .widget-widgitStyle {
-  background-color: #F8F5F2;
+  background-color: #f8f5f2;
   border-radius: 10px;
   z-index: 10;
   -webkit-box-shadow: 0 0 3px black;
@@ -44,6 +44,37 @@ body {
   overflow-y: scroll;
   -webkit-animation: popAnimation-wrapper 0.8s ease forwards;
           animation: popAnimation-wrapper 0.8s ease forwards;
+}
+
+.widget-expandButtonClass {
+  background: #ddd;
+}
+
+.widget-expandButtonClass:hover {
+  -webkit-filter: brightness(110%);
+          filter: brightness(110%);
+}
+
+@-webkit-keyframes slideIn {
+  0% {
+    right: 110px;
+    width: 0px;
+  }
+  100% {
+    width: 100px;
+    right: -100px;
+  }
+}
+
+@-webkit-keyframes slideOut {
+  0% {
+    width: 100px;
+    right: -100px;
+  }
+  100% {
+    right: 110px;
+    width: 0px;
+  }
 }
 
 @-webkit-keyframes jiggle {
@@ -98,7 +129,7 @@ body {
   10% {
     -webkit-transform: scale(1.1);
             transform: scale(1.1);
-    background-color: #848F9A;
+    background-color: #848f9a;
   }
   20% {
     -webkit-transform: scale(1.05);
@@ -119,7 +150,7 @@ body {
   10% {
     -webkit-transform: scale(1.1);
             transform: scale(1.1);
-    background-color: #848F9A;
+    background-color: #848f9a;
   }
   20% {
     -webkit-transform: scale(1.05);
@@ -136,7 +167,7 @@ body {
   0% {
   }
   10% {
-    background-color: #848F9A;
+    background-color: #848f9a;
   }
   20% {
   }
@@ -148,7 +179,7 @@ body {
   0% {
   }
   10% {
-    background-color: #848F9A;
+    background-color: #848f9a;
   }
   20% {
   }
