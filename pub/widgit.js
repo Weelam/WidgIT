@@ -88,6 +88,21 @@ const removeWidgetStyle = `
 
 `;
 
+const expandButtonStyle = ` 
+  height: 10%;
+  width: 15px;
+  position: absolute;
+  right: -15px;
+  top: 5px;
+  padding: 0;
+  margin: 0;
+  border: none;
+	padding: 0;
+	font: inherit;
+	outline: inherit;
+  
+`;
+
 // actual code -----------------------------------------------------------------------------------------------
 // [{widget: ..., widgetIdentifierClass: ,clone:[...]}] -> stores widget objects
 let widgetObjects = [];
@@ -143,7 +158,8 @@ const handleMouseDown = (e, widget, widgetObject) => {
         addResizer(widget);
       }
       const wrapper = widget.parentNode;
-      openTaskBar(wrapper, widget, widgetObject, isClone);
+      // console.log(wrapper, widget, widgetObject, isClone)
+      // openTaskBar(wrapper, widget, widgetObject, isClone);
 
       // add widget styles
       widget.style.cssText += widgetStyle + widgetStyleDragging;
@@ -209,8 +225,8 @@ const handleRemoveWidget = (wrapper, widget, widgetObject, taskbar) => {
   });
 };
 
-const openTaskBar = (wrapper, widget, widgetObject, isClone) => {
-  if (!isClone) {
+const openTaskBar = (wrapper, widget, widgetObject, setOpen) => {
+  if (setOpen) {
     // create taskbar
     const originalWidget = widgetObject["original"];
     const taskbar = document.createElement("div");
@@ -298,8 +314,17 @@ const cloneWidget = (widget, widgetObject) => {
   wrapper.style.top = bounding.top + "px";
   wrapper.style.left = bounding.left + "px";
 
-  // wrap all descendnents
-  // addWrapper(descendents);
+  // add expand button
+  const expandButton = document.createElement("button");
+  expandButton.style.cssText += expandButtonStyle;
+  expandButton.setAttribute("expand", true);
+  expandButton.innerHTML= ">";
+  expandButton.onclick = () => {
+    console.log(wrapper, widget ,widgetObject)
+    openTaskBar(wrapper, widgetClone, widgetObject, true);
+
+  }
+  wrapper.append(expandButton);
   return widgetClone;
 };
 
@@ -314,7 +339,9 @@ const handleResizer = (widget, resizeNodes) => {
       let y1 = e.clientY;
       // loop through every single descendent and apply the style
       let descendents = Array.from(wrapper.getElementsByTagName("*"));
-      descendents = descendents.filter((descendent) => !descendent.getAttribute("taskbar"));
+      descendents = descendents.filter(
+        (descendent) => !descendent.getAttribute("taskbar")
+      );
       console.log(descendents);
       const handleResizeMouseMove = (e) => {
         descendents.forEach((descendent) => {
@@ -345,7 +372,6 @@ const handleResizer = (widget, resizeNodes) => {
 const addWrapper = (elements) => {
   // wraps all elements in a div wrapper (used for all descendents except for the widget itself)
   elements.forEach((element) => {
-    
     const wrapper = element.parentNode;
     const div = document.createElement("div");
     div.appendChild(element);
@@ -369,7 +395,13 @@ const resize = (element, currentResizer, x1, y1, e, wrapper) => {
   const bounding = wrapper.getBoundingClientRect();
   const x2 = e.clientX - x1;
   const y2 = e.clientY - y1;
-  if (element.getAttribute("se") || element.getAttribute("sw") || element.getAttribute("ne") || element.getAttribute("nw") ) {
+  if (
+    element.getAttribute("se") ||
+    element.getAttribute("sw") ||
+    element.getAttribute("ne") ||
+    element.getAttribute("nw") ||
+    element.getAttribute("expand")
+  ) {
     return;
   }
   // before we introduced the idea of positioning relative to a wrapper, resizing was weird
@@ -388,7 +420,6 @@ const resize = (element, currentResizer, x1, y1, e, wrapper) => {
     wrapper.style.width = bounding.width - x2 + "px";
     wrapper.style.height = bounding.height + y2 + "px";
     wrapper.style.left = bounding.left + x2 + "px";
-
   } else if (currentResizer.getAttribute("ne")) {
     element.style.width = bounding.width + x2 + "px";
     element.style.height = bounding.height - y2 + "px";
