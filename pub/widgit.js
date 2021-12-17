@@ -1,12 +1,15 @@
 "use strict";
 // inline styles, since they have higher priority
 const widgetStyleDragging = `
-	animation: popAnimation 0.8s ease forwards; 
+	animation: popAnimation 0.8s ease forwards, jiggle .1s ease-in-out infinite alternate; 
 	opacity: 0.5;
+  box-sizing: border-box;
 	`;
 
 const wrapperStyleDragging = `
   animation: popAnimation-wrapper 0.8s ease forwards; 
+  box-sizing: border-box;
+
 `;
 
 const widgetStyle = `
@@ -15,6 +18,8 @@ const widgetStyle = `
   z-index: 10;
   box-shadow: 0 0 3px black;
   margin: 0;
+  overflow-y: scroll;
+  
 `;
 const resizerStyle = `
 	position: absolute;
@@ -142,6 +147,7 @@ const handleMouseDown = (e, widget, widgetObject) => {
 
       // add widget styles
       widget.style.cssText += widgetStyle + widgetStyleDragging;
+      // widget.add.classList("widget-widgitStyle")
       wrapper.style.cssText += wrapperStyleDragging;
       widget.setAttribute("draggable", false);
       widget.style.cursor = "move";
@@ -293,14 +299,13 @@ const cloneWidget = (widget, widgetObject) => {
   wrapper.style.left = bounding.left + "px";
 
   // wrap all descendnents
-  const descendents = Array.from(widgetClone.getElementsByTagName("*"));
   // addWrapper(descendents);
   return widgetClone;
 };
 
 const handleResizer = (widget, resizeNodes) => {
   const wrapper = widget.parentNode;
-  wrapper.style.border = "solid 1px black";
+  // wrapper.style.border = "solid 1px black";
   resizeNodes.forEach((node) => {
     const handleResizeMouseDown = (e) => {
       let currentResizer = e.target;

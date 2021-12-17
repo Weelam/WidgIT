@@ -29,9 +29,41 @@ body {
 }
 
 .widgit-dragging {
-  -webkit-animation: popAnimation 0.8s ease forwards;
-          animation: popAnimation 0.8s ease forwards;
+  -webkit-animation: popAnimation 0.8s ease forwards, jiggle .1s ease-in-out infinite alternate;
+          animation: popAnimation 0.8s ease forwards, jiggle .1s ease-in-out infinite alternate;
   opacity: 0.5;
+}
+
+.widget-widgitStyle {
+  background-color: #F8F5F2;
+  border-radius: 10px;
+  z-index: 10;
+  -webkit-box-shadow: 0 0 3px black;
+          box-shadow: 0 0 3px black;
+  margin: 0;
+  overflow-y: scroll;
+  -webkit-animation: popAnimation-wrapper 0.8s ease forwards;
+          animation: popAnimation-wrapper 0.8s ease forwards;
+}
+
+@-webkit-keyframes jiggle {
+  from {
+    -webkit-transform: rotate(1deg);
+  }
+  to {
+    -webkit-transform: rotate(-1deg);
+    -webkit-transform-origin: center center;
+  }
+}
+
+@keyframes jiggle {
+  from {
+    -webkit-transform: rotate(1deg);
+  }
+  to {
+    -webkit-transform: rotate(-1deg);
+    -webkit-transform-origin: center center;
+  }
 }
 
 @-webkit-keyframes popAnimation-remove {
