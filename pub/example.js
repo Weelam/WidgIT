@@ -1,37 +1,29 @@
-'use strict';
+"use strict";
 // all the images and videos are widgets
 // const images = document.querySelectorAll(".widgit-img");
 const images = document.querySelectorAll("img");
-const videos = document.querySelectorAll("video")
-const otherWidgets = document.querySelectorAll(".other-widgets")
-const steve = document.querySelector(".steve")
+const videos = document.querySelectorAll("video");
+const otherWidgets = document.querySelectorAll(".other-widgets");
+const steve = document.querySelector(".steve");
 // document.querySelectorAll('*').style.boxSizing = "border-box";
 
+// It is up to the developer to how they want to let the client know an element is "widgetable". In thie case we will lower the
+// opacity of the elements on hover, and change the background color to #ddd. Please do this with classes only.
+images.forEach((image) => {
+  // call createWidget(element) to turn that element into a widget
+  let imageWidget = createWidget(image);
+  imageWidget.setIdentifier("widgit-widget");
+});
 
+videos.forEach((video) => {
+  let videoWidget = createWidget(video);
+  videoWidget.setIdentifier("widgit-widget");
+});
 
-// It is up to the developer to how they want to let the client know an element is "widgetable". In thie case we will lower the 
-// opacity of the elements on hover, and change the background color to #ddd. Please do this with classes only. 
-images.forEach(image => {
-    // call createWidget(element) to turn that element into a widget
-    // image.style.border = "solid 1px black"
-    createWidget(image)
-    // setWidgetIdentity(element, className) to set an class that will notify user which element is a widget
-    setWidgetIdentity(image, "widgit-widget")
-})
+otherWidgets.forEach((otherWidget) => {
+  let otherWidgetObj = createWidget(otherWidget);
+  otherWidgetObj.setIdentifier("widgit-widget");
+});
 
-
-videos.forEach(video => {
-    createWidget(video)
-    setWidgetIdentity(video, "widgit-widget")
-})
-
-otherWidgets.forEach(otherWidget => {
-    createWidget(otherWidget)    
-    setWidgetIdentity(otherWidget, "widgit-widget")
-})
-
-// limitations
-// resizing only works on the widget itself
-// In order for the childrens to work as well, users must specify the height relative to the widget container 
-// But, this is more of a general rule I'm going to enforce
-
+// set hold down time (in ms) default is .5s
+// setHoldDownTime(2000)

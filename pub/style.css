@@ -55,6 +55,10 @@ body {
           filter: brightness(110%);
 }
 
+.widgit-hideScroll::-webkit-scrollbar {
+  display: none;
+}
+
 @-webkit-keyframes slideIn {
   0% {
     right: 110px;
