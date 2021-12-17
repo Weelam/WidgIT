@@ -142,6 +142,9 @@
   let timeout_id;
   let resizing = false;
   let holdDownTime;
+  let slideInDuration = 1;
+  let slideOutDuration = 1;
+
   const resizes = ["widgit-se", "widgit-sw", "widgit-ne", "widgit-nw"];
 
   // instantiate the widget object and add it to widgetObjects array
@@ -174,6 +177,16 @@
     holdDownTime = duration;
   };
 
+  // change slide in animation duration
+  const setMenuOpenAnimationSpeed = (duration) => {
+    slideInDuration = duration;
+  };
+
+  // change slide in animation duration
+  const setMenuCloseAnimationSpeed = (duration) => {
+    slideOutDuration = duration;
+  };
+
   const handleMouseDown = (e, widget, widgetObject) => {
     if (!resizing) {
       timeout_id = setTimeout(() => {
@@ -187,7 +200,7 @@
 
         // add widget styles
         widget.style.cssText += widgetStyle + widgetStyleDragging;
-        widget.classList.add("widgit-hideScroll")
+        widget.classList.add("widgit-hideScroll");
         // widget.add.classList("widget-widgitStyle")
         wrapper.style.cssText += wrapperStyleDragging;
         widget.setAttribute("draggable", false);
@@ -257,6 +270,8 @@
       taskbar.setAttribute("taskbar", true);
       wrapper.append(taskbar);
       taskbar.style.cssText += taskbarStylePositioner + taskbarStyle;
+      taskbar.style.animation = `slideIn ${slideInDuration}s forwards`;
+
       // remove button
       const removeWidget = document.createElement("button");
       removeWidget.innerHTML = "Remove widget";
@@ -285,6 +300,7 @@
       closeButton.innerHTML = "Close menu";
       closeButton.onclick = () => {
         taskbar.style.cssText += removeTaskBarStyle;
+        taskbar.style.animation = `slideOut ${slideOutDuration}s forwards`;
       };
       closeButton.style.cssText += taskBarButtonStyle;
       closeButton.setAttribute("taskbar", true);
@@ -488,4 +504,6 @@
   // global stuff
   global.createWidget = createWidget;
   global.setHoldDownTime = setHoldDownTime;
+  global.setMenuOpenAnimationSpeed = setMenuOpenAnimationSpeed;
+  global.setMenuCloseAnimationSpeed = setMenuCloseAnimationSpeed;
 })(window, window.document, $); // pass the global window object and jquery to the anonymous function. They will now be locally scoped inside of the function.

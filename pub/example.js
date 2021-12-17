@@ -27,3 +27,7 @@ otherWidgets.forEach((otherWidget) => {
 
 // set hold down time (in ms) default is .5s
 // setHoldDownTime(2000)
+
+// set open and close animation speed of the menu (default is 1s)
+setMenuOpenAnimationSpeed(2)
+setMenuCloseAnimationSpeed(2)
