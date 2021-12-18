@@ -12,157 +12,171 @@
   <head>
     <meta charset="utf-8" />
     <title>Low Quality Article</title>
-    <link rel="stylesheet" type="text/css" href="exampleStyles.css" />
-    <!-- the styles necessary for the library -->
-    <link rel="stylesheet" href="./style.css" />
-    <!-- widgit.js must be loaded in first!!!! -->
-    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- widgit library stuff -->
+    <script
+      defer
+      src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+    ></script>
     <script src="./widgit.js" defer></script>
+    <link rel="stylesheet" href="./style.css" />
+    <!-- other stuff -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="homeStyles.css" />
+    <link rel="stylesheet" type="text/css" href="exampleStyles.css" />
+
     <script src="./example.js" defer></script>
   </head>
 
   <body>
-    <div class="root-container">
-      <div class="header">
-        <h1>Low Quality Article</h1>
-        <div class="author-date">
-          <p>By Giorno Giovanna - Fake news</p>
-          <p>Posted 4/20/2069</p>
-        </div>
+    <div class="home-container">
+      <div class="home-topBar">
+        <a
+          target="_blank"
+          href="https://github.com/csc309-fall-2021/js-library-lintao7"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="feather feather-github"
+          >
+            <path
+              d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+            ></path>
+          </svg>
+        </a>
       </div>
-      <div class="widgit-img">
-        <div>
-          <img class="main-image" src="./media/cookout.jpg" />
-        </div>
-      </div>
+    </div>
 
-      <p class="other-widgets">
-        Yo what is up fortnite gamers it's asiantrollerz here welcome back to
-        another brand new gaemplay. Todday we are playing the scout. Elit
-        aliquip reprehenderit id et sit voluptate pariatur anim. Amet sit
-        reprehenderit tempor nulla in. Lorem commodo aliquip consectetur ut
-        aliquip commodo tempor. Exercitation reprehenderit anim incididunt
-        pariatur ex reprehenderit aliquip ullamco laboris incididunt aute amet
-        exercitation qui. Exercitation in nulla voluptate proident deserunt
-        magna nisi fugiat ipsum est.
-      </p>
-      <div>
-        <h2>"I, Giorno Giovanna, have a dream"</h2>
-        <img class="steve" style="height: 50%;" src="./media/green_stand.jpg" />
-        <img src="./media/star_platinum.jpg" />
-        <p class="other-widgets">
-          My name is Yoshikage Kira. I’m 33 years old. My house is in the
-          northeast section of Morioh, where all the villas are, and I am not
-          married. I work as an employee for the Kame Yu department stores, and
-          I get home every day by 8 PM at the latest. I don’t smoke, but I
-          occasionally drink. I’m in bed by 11 PM, and make sure I get eight
-          hours of sleep, no matter what. After having a glass of warm milk and
-          doing about twenty minutes of stretches before going to bed, I usually
-          have no problems sleeping until morning. Just like a baby, I wake up
-          without any fatigue or stress in the morning. I was told there were no
-          issues at my last check-up. I’m trying to explain that I’m a person
-          who wishes to live a very quiet life. I take care not to trouble
-          myself with any enemies, like winning and losing, that would cause me
-          to lose sleep at night. That is how I deal with society, and I know
-          that is what brings me happiness. Although, if I were to fight I
-          wouldn’t lose to anyone.
-        </p>
-      </div>
-      <div>
-        <h2>
-          You've been scrolling for a long time (probably like 1 min). Stop here
-          for a bit and vibe with this raccoon.
-        </h2>
-        <video width="100%" height="400px" controls>
-          <source src="media/raccoon_vibing.mp4" type="video/mp4" />
-        </video>
-      </div>
+    <div class="home-landing">
+      <h1>WidgIT.js</h1>
+      <h6>Eliminate the use of scrolling back and forth on any webpage</h6>
+      <button class="button">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="40"
+          height="40"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="feather feather-chevron-down"
+        >
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </button>
+    </div>
 
-      <div>
-        <h2>
-          You've been scrolling for a long time again. But it's ok, I've
-          prepared 2 videos this time.
-        </h2>
-        <div class="vid-break-2">
-          <video width="50%" height="400px" controls>
-            <source src="media/frog-vibbing.mp4" type="video/mp4" />
-          </video>
-          <video width="50%" height="400px" controls>
-            <source
-              src="media/kill_trips_and_almost_dies.mp4"
-              type="video/mp4"
-            />
-          </video>
+    <div class="home-bottom">
+      <div class="examples-root">
+        <div  class="examples-example">
+          <h4>Basic usage</h4>
+          <div class="examples-content">
+            <div class="examples-widgitDiv">
+              <img class="examples-widgit" src="./media/cookout.jpg" />
+            </div>
+
+            <div index="0" class="example-code">
+              <div class="tabs">
+                <ul>
+                  <li index="0"><a>JS</a></li>
+                  <li index="1" class="is-active"><a>HTML</a></li>
+                  <li index="2"><a>CSS</a></li>
+                </ul>
+              </div>
+              <code index="0">js code</code>
+              <code index="1" style="display: none;">html code</code>
+              <code index="2" style="display: none;">css code</code>
+
+        
+            </div>
+          </div>
+        </div>
+        <div class="examples-example">
+          <h4>Resizing</h4>
+
+          <div index="1" class="example-code">
+            <div class="tabs">
+              <ul>
+                <li index="0" class="is-active"><a>JS</a></li>
+                <li index="1"><a>HTML</a></li>
+                <li index="2"><a>CSS</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="examples-example">
+          <h4>Scroll</h4>
+          <div index="2" class="example-code">
+            <div class="tabs">
+              <ul>
+                <li index="0" class="is-active"><a>JS</a></li>
+                <li index="1"><a>HTML</a></li>
+                <li index="2"><a>CSS</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="examples-example">
+          <h4>Remove widget</h4>
+          <div index="3" class="example-code">
+            <div class="tabs">
+              <ul>
+                <li index="0" class="is-active"><a>JS</a></li>
+                <li index="1"><a>HTML</a></li>
+                <li index="2"><a>CSS</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="examples-example">
+          <h4>Change identifier</h4>
+          <div index="4" class="example-code">
+            <div class="tabs">
+              <ul>
+                <li index="0" class="is-active"><a>JS</a></li>
+                <li index="1"><a>HTML</a></li>
+                <li index="2"><a>CSS</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="examples-example">
+          <h4>Set hold down time</h4>
+          <div index="5" class="example-code">
+            <div class="tabs">
+              <ul>
+                <li index="0" class="is-active"><a>JS</a></li>
+                <li index="1"><a>HTML</a></li>
+                <li index="2"><a>CSS</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="examples-example">
+          <h4>Set menu close/open animation speed</h4>
+          <div index="6" class="example-code">
+            <div class="tabs">
+              <ul>
+                <li index="0" class="is-active"><a>JS</a></li>
+                <li index="1"><a>HTML</a></li>
+                <li index="2"><a>CSS</a></li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
-
-      <div>
-        <h2>More random text accompanied by a random pictures</h2>
-
-        <p class="other-widgets">
-          Consequat consectetur Lorem ea pariatur ut irure aute. Culpa cillum
-          laboris commodo laborum ad nostrud. Mollit ut incididunt labore ea
-          aliqua officia eu officia ipsum consequat non nulla elit. Sint eiusmod
-          consectetur aliqua amet fugiat ad sint nostrud dolore labore
-          excepteur. Ut magna mollit est id veniam velit minim cillum. Sit ex
-          qui pariatur exercitation dolore sunt. Quis fugiat amet consectetur
-          dolor pariatur incididunt irure labore commodo laboris ipsum. Tempor
-          enim incididunt nulla sint enim. Magna enim sit esse excepteur dolor.
-          Velit sit sint ea eiusmod tempor irure. Incididunt ad sunt culpa
-          exercitation laborum.
-        </p>
-        <div class="another-gallery">
-          <img src="./media/final_boss.jpeg" />
-          <img src="./media/drink_water.jpeg" />
-          <img src="./media/damn_my_brain.jpeg" />
-          <img src="./media/big_cat.jpeg" />
-        </div>
-      </div>
-      <div>
-        <h2>Damn I'm running out of ideas. So here's a text of a cat</h2>
-        <p>Highlight to see it clearly :)</p>
-        <p>
-          ⣿⣿⣿⠟⠛⠛⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⢋⣩⣉⢻ <br />
-          ⣿⣿⣿⠀⣿⣶⣕⣈⠹⠿⠿⠿⠿⠟⠛⣛⢋⣰⠣⣿⣿⠀⣿ <br />
-          ⣿⣿⣿⡀⣿⣿⣿⣧⢻⣿⣶⣷⣿⣿⣿⣿⣿⣿⠿⠶⡝⠀⣿ <br />
-          ⣿⣿⣿⣷⠘⣿⣿⣿⢏⣿⣿⣋⣀⣈⣻⣿⣿⣷⣤⣤⣿⡐⢿ <br />
-          ⣿⣿⣿⣿⣆⢩⣝⣫⣾⣿⣿⣿⣿⡟⠿⠿⠦⠀⠸⠿⣻⣿⡄⢻ <br />
-          ⣿⣿⣿⣿⣿⡄⢻⣿⣿⣿⣿⣿⣿⣿⣿⣶⣶⣾⣿⣿⣿⣿⠇⣼ <br />
-          ⣿⣿⣿⣿⣿⣿⡄⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⣰ <br />
-          ⣿⣿⣿⣿⣿⣿⠇⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢀⣿ <br />
-          ⣿⣿⣿⣿⣿⠏⢰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢸⣿ <br />
-          ⣿⣿⣿⣿⠟⣰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⣿ <br />
-          ⣿⣿⣿⠋⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡄⣿ <br />
-          ⣿⣿⠋⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⢸ <br />
-          ⣿⠏⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢸ ⣿⠏⣼⣿⣿⣿⣿⣿⣿⣿⣿<br />
-        </p>
-      </div>
-      <div>
-        <h2>
-          Okay I'm out of ideas now so i'm just gonna dump the rest of my media
-          files here
-        </h2>
-        <div class="file-dump">
-          <img src="./media/hehe_stupid_kid.jpeg" />
-          <img src="./media/math_memes.jpeg" />
-          <video width="50%" height="400px" controls>
-            <source src="media/cat_breakdance.mp4" type="video/mp4" />
-          </video>
-          <video width="50%" height="400px" controls>
-            <source
-              src="media/penguin_turns_into_missle.mp4"
-              type="video/mp4"
-            />
-          </video>
-          <video width="50%" height="400px" controls>
-            <source src="media/kid_bouncing.mp4" type="video/mp4" />
-          </video>
-          <video width="50%" height="400px" controls>
-            <source src="media/ligh_mode.mp4" type="video/mp4" />
-          </video>
-        </div>
-      </div>
-      <h1>Thanks for reading. Have a good day.</h1>
     </div>
   </body>
 </html>

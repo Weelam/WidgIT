@@ -1,0 +1,191 @@
+$popColor: #848f9a;
+
+.box {
+  background: red;
+  width: 100px;
+  height: 100px;
+}
+
+html,
+body {
+  position: relative;
+}
+
+.widgit-taskbar {
+  button {
+    background: none;
+    border-style: none;
+    color: white;
+    padding: 0.5rem 0.5rem;
+    &:hover {
+      background-color: #848f9a !important;
+    }
+  }
+}
+
+.widgit-removeWidget {
+  animation: popAnimation-remove 0.8s ease forwards;
+  height: 0px; //or anything you need
+  transition: height 1s;
+}
+
+.widgit-dragging {
+  animation: popAnimation 0.8s ease forwards,
+    jiggle 0.1s ease-in-out infinite alternate;
+  opacity: 0.5;
+}
+
+.widget-widgitStyle {
+  background-color: #f8f5f2;
+  border-radius: 10px;
+  z-index: 10;
+  box-shadow: 0 0 3px black;
+  margin: 0;
+  overflow-y: scroll;
+  animation: popAnimation-wrapper 0.8s ease forwards;
+  //   ::-webkit-scrollbar {
+  //     display: none;
+  // }
+}
+
+.widget-expandButtonClass {
+  background: #ddd;
+  &:hover {
+    filter: brightness(110%);
+    // background: blue;
+  }
+}
+
+.widgit-hideScroll {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+// animations
+@-webkit-keyframes slideIn {
+  0% {
+    right: 110px;
+    width: 0px;
+
+  }
+  100% {
+    width: 100px;
+    right: -100px;
+
+  }
+}
+@-webkit-keyframes slideOut {
+  0% {
+    width: 100px;
+    right: -100px;
+
+  }
+  100% {
+    right: 110px;
+    width: 0px;
+
+  }
+}
+@keyframes jiggle {
+  from {
+    -webkit-transform: rotate(1deg);
+  }
+  to {
+    -webkit-transform: rotate(-1deg);
+    -webkit-transform-origin: center center;
+  }
+}
+@keyframes popAnimation-remove {
+  0% {
+    transform: scale(1);
+    opacity: 0.2;
+  }
+
+  100% {
+    transform: scale(0);
+  }
+}
+
+@keyframes popAnimation {
+  0% {
+    transform: scale(1);
+    // background-color: blue;
+  }
+
+  10% {
+    // transform: rotate(0.5turn);
+    transform: scale(1.1);
+    background-color: $popColor;
+  }
+
+  20% {
+    transform: scale(1.05);
+    background-color: inherit;
+  }
+  100% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes popAnimation-wrapper {
+  0% {
+    // background-color: blue;
+  }
+
+  10% {
+    // transform: rotate(0.5turn);
+    background-color: $popColor;
+  }
+
+  20% {
+  }
+  100% {
+    // transform: rotate(0.5turn);
+    // background-color: blue;
+  }
+}
+
+@keyframes slide {
+  100% {
+    left: 0;
+  }
+}
+
+@keyframes slide {
+  100% {
+    left: 0;
+  }
+}
+// .widgit-sizer {
+// 	position: absolute;
+// 	background-color: transparent;
+// 	z-index: 3;
+// 	width: 15px;
+// 	height: 15px;
+// }
+
+// .widgit-sizer.widgit-nw {
+// 	cursor: nw-resize;
+// 	top: 0px;
+// 	left: 0px;
+// }
+
+// .widgit-sizer.widgit-ne {
+// 	cursor: ne-resize;
+// 	top: 0px;
+// 	right: 0px;
+// }
+
+// .widgit-sizer.widgit-sw {
+// 	cursor: sw-resize;
+// 	bottom: 0px;
+// 	left: 0px;
+
+// }
+
+// .widgit-sizer.widgit-se {
+// 	cursor: se-resize;
+// 	bottom: 0px;
+// 	right: 0px;
+
+// }

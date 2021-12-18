@@ -1,0 +1,36 @@
+h1 {
+}
+
+.root-container {
+    padding: 0 6%;
+}
+
+html, body {
+    padding: 0px;
+    margin: 0px;
+}
+
+img {
+    height: 400px;
+}
+
+.vid-break-2 {
+    display: flex;
+}
+
+.another-gallery {
+    display: flex;
+    flex-wrap: wrap;
+
+    img {
+        width: 25%;
+        height: auto;
+    }
+}
+
+.widgit-widget {
+    &:hover {
+        opacity: 0.8;
+        background: #ddd;
+    }
+}

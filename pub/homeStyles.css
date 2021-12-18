@@ -1,0 +1,85 @@
+.home-landing {
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  row-gap: 30px;
+  text-align: center;
+  background-color: #4158d0;
+  background-image: linear-gradient(43deg, #4158d0 0%, #c850c0 46%, #ffcc70 100%);
+  color: white;
+}
+
+.home-landing h1 {
+  font-weight: 500;
+  font-size: 4rem;
+}
+
+.home-landing button {
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: auto;
+  margin: 0 10px;
+}
+
+.home-topBar {
+  width: 100%;
+  background: none;
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  padding: 15px 5%;
+}
+
+.home-topBar a {
+  color: black;
+  cursor: pointer;
+}
+
+.home-tabs {
+  margin: 15px 0;
+}
+
+.home-bottom {
+  padding: 0 20px;
+}
+
+.examples-root {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.examples-example {
+  margin: 10px 0;
+}
+
+.examples-widgitDiv {
+  background: #ddd;
+  padding: 20px;
+}
+
+code {
+  display: block;
+}
+/*# sourceMappingURL=homeStyles.css.map */

@@ -1,4 +1,78 @@
 "use strict";
+
+// ************************* landing page stuff ***************************
+let tabs = ["0", "0", "0", "0", "0", "0", "0"];
+
+const updateCodeDisplay = () => {
+  const exampleCodes = document.querySelectorAll(".example-code");
+
+  exampleCodes.forEach((item) => {
+    const outerIndex = item.getAttribute("index");
+
+    item.querySelectorAll("*").forEach((item2) => {
+      const selectedTab = tabs[outerIndex]
+      if (item2.tagName === "CODE") {
+        const innerIndex = item2.getAttribute("index");
+
+        if (selectedTab !== innerIndex) { 
+          item2.style.display = "none";
+        } else {
+          item2.style.display = "block"
+          console.log(item2)
+
+        }
+      }
+    });
+})}
+
+const updateTab = () => {
+  const exampleCodes = document.querySelectorAll(".example-code");
+
+  exampleCodes.forEach((item) => {
+    const outerIndex = item.getAttribute("index");
+
+    item.querySelectorAll("*").forEach((item2) => {
+      const selectedTab = tabs[outerIndex]
+      if (item2.tagName === "LI") {
+        if (item2.getAttribute("index") === selectedTab) {
+          item2.classList.add("is-active")
+
+        } else {
+          item2.classList.remove("is-active")
+        }
+      }
+    });
+  });
+
+  updateCodeDisplay();
+};
+
+const tabListener = (item2, outerIndex) => {
+  const innerIndex = item2.getAttribute("index");
+  tabs[outerIndex] = innerIndex;
+  console.log(tabs)
+  updateTab()
+}
+
+const addTabListener = () => {
+  const exampleCodes = document.querySelectorAll(".example-code");
+
+  exampleCodes.forEach((item) => {
+    const outerIndex = item.getAttribute("index");
+
+    item.querySelectorAll("*").forEach((item2) => {
+      if (item2.tagName === "LI") {
+        item2.addEventListener("mousedown", () => tabListener(item2, outerIndex))
+      }
+    });
+
+
+  });
+}
+
+addTabListener();
+
+// ************************* widget stuff ***************************
 // all the images and videos are widgets
 // const images = document.querySelectorAll(".widgit-img");
 const images = document.querySelectorAll("img");
@@ -29,5 +103,3 @@ otherWidgets.forEach((otherWidget) => {
 // setHoldDownTime(2000)
 
 // set open and close animation speed of the menu (default is 1s)
-setMenuOpenAnimationSpeed(2)
-setMenuCloseAnimationSpeed(2)
