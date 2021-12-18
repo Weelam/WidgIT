@@ -197,7 +197,6 @@
         if (!isClone) {
           
           widget = cloneWidget(widget, widgetObject);
-          console.log(widget.clientHeight, widget.clientWidth)
 
           addResizer(widget);
           
@@ -213,7 +212,6 @@
         wrapper.setAttribute("draggable", false)
         widget.style.cursor = "move";
         // add wrapper styles
-        console.log(widget.clientHeight, widget.clientWidth)
         wrapper.style.height = widget.clientHeight + "px";
         wrapper.style.width = widget.clientWidth + "px";
         // this only happens when we mouse down
@@ -375,7 +373,6 @@
       openTaskBar(wrapper, widgetClone, widgetObject, true);
     };
     wrapper.append(expandButton);
-    console.log(widgetClone.clientHeight, widgetClone.clientWidth)
 
     return widgetClone;
   };

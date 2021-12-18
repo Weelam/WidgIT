@@ -53,7 +53,6 @@ const updateCodeDisplay = () => {
           item2.style.display = "none";
         } else {
           item2.style.display = "block";
-          console.log(item2);
         }
       }
     });
@@ -86,7 +85,6 @@ const updateTab = () => {
 const tabListener = (item2, outerIndex) => {
   const innerIndex = item2.getAttribute("index");
   tabs[outerIndex] = innerIndex;
-  console.log(tabs);
   updateTab();
 };
 
