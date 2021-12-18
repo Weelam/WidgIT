@@ -125,6 +125,7 @@
       return this.clones;
     }
 
+    // private functions
     addClone(clone) {
       this.clones.push(clone);
     }

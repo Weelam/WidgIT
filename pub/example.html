@@ -86,10 +86,68 @@
         </ul>
       </div>
 
-      <div class="documentation">
+      <div class="documentation" style="display: none">
+        <div class="documentation-gettingStarted">
+          <h4>Getting started</h4>
+          <p> The library requires the followings: Jquery, widgit.js (library code) and style.css (css file for the library). Make sure to have to Jquery script before the widigt.js script. </p>
+          <img src="media/setup.png"> 
+          <h4>Basic functionality</h4>
+          <p> First you want to call the <code style="display: inline">createWidget(element)</code>, which takes in the element in which you want the user to create widgets out of. The function will return an object of the widget, which will be used for setting the identifier. Afterwards the user should be able to create widgets out of said element.</p>
+          <img src="media/basic-usage.png">
+          <h4>Widget Object</h4>
+          <img src="media/widget-class.png">
+        </div>
+        
         <div class="documentation-methods">
-
-
+          <h4>Methods</h4>
+          <table class="table">
+            <thead>
+              <tr>
+                <th><abbr title="Position">Name</abbr></th>
+                <th>Parameters</th>
+                <th><abbr title="Played">Description</abbr></th>
+                <th><abbr title="Won">Return</abbr></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>createWidget(element)</th>
+                <th>element: DOM element</th>
+                <th>Allows users to create widgets out of said element</th>
+                <th>the widget object associated with said element</th>
+              </tr>
+              <tr>
+                <th>widget.setIdentifier(className)</th>
+                <th>className: string</th>
+                <th>Applies the CSS associated with the class, className, onto the original element. This is to assist the end users in identifying which elements is "widgetable" or not.</th>
+                <th>/</th>
+              </tr>
+              <tr>
+                <th>widget.getClones()</th>
+                <th>/</th>
+                <th>Returns the clones, aka the widgets created, created from the original element</th>
+                <th>/</th>
+              </tr>
+              <tr>
+                <th>setHoldDownTime(time)</th>
+                <th>time: Number</th>
+                <th>Sets the time the user needs to hold down their mouse in order to create a widget. Time is measusred in ms. </th>
+                <th>/</th>
+              </tr>
+              <tr>
+                <th>setMenuOpenAnimationSpeed(time)</th>
+                <th>time: Number</th>
+                <th>Sets how long it will take to open the menu(animation time). Time is measured in ms. </th>
+                <th>/</th>
+              </tr>
+              <tr>
+                <th>setMenuCloseAnimationSpeed(time)</th>
+                <th>time: Number</th>
+                <th>Sets how long it will take to close the menu(animation time). Time is measured in ms. </th>
+                <th>/</th>
+              </tr>
+            </tbody>
+          </table>
           
         </div>
       </div>

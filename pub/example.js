@@ -118,7 +118,6 @@ scrollButton.addEventListener("click", () => {
 });
 
 // ************************* widget stuff ***************************
-
 const widgits = document.querySelectorAll(".examples-widgit-1");
 
 widgits.forEach((widgit) => {
