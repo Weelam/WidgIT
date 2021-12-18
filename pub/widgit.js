@@ -72,7 +72,7 @@
   flex-direction: column;
   border-radius: 5px;
   overflow: hidden;
-  background: #5E6973;
+  background: #b3a9e2;
   animation: slideIn 1s forwards;
 `;
 
@@ -190,11 +190,16 @@
   const handleMouseDown = (e, widget, widgetObject) => {
     if (!resizing) {
       timeout_id = setTimeout(() => {
+        
         const isClone = widget.getAttribute("clone");
         // note: we don't know if "widget" is a clone or not
         if (!isClone) {
+          
           widget = cloneWidget(widget, widgetObject);
+          console.log(widget.clientHeight, widget.clientWidth)
+
           addResizer(widget);
+          
         }
         const wrapper = widget.parentNode;
 
@@ -204,8 +209,10 @@
         // widget.add.classList("widget-widgitStyle")
         wrapper.style.cssText += wrapperStyleDragging;
         widget.setAttribute("draggable", false);
+        wrapper.setAttribute("draggable", false)
         widget.style.cursor = "move";
         // add wrapper styles
+        console.log(widget.clientHeight, widget.clientWidth)
         wrapper.style.height = widget.clientHeight + "px";
         wrapper.style.width = widget.clientWidth + "px";
         // this only happens when we mouse down
@@ -323,9 +330,13 @@
     // clone node
     let widgetClone = widget.cloneNode(true);
     widgetClone.setAttribute("clone", true);
+    
     widgetClone.classList.remove(widgetObject.widgetIdentifierClass); // this is to remove the identifier class for the original element
+    
     bodyNode.append(widgetClone);
-
+    // set widgetclone height because it gets messed up after we append it to the body
+    widgetClone.style.height = widget.clientHeight + "px";
+    widgetClone.style.width = widget.clientWidth + "px";
     // wrap clone inside div
     const wrapper = document.createElement("div");
     wrapper.appendChild(widgetClone);
@@ -336,7 +347,7 @@
     );
 
     widgetObject.addClone(widgetClone);
-
+    
     // reset widget timeout
     widgetClone.addEventListener("mouseup", () => resetTimeout(timeout_id));
     widgetClone.addEventListener("mouseleave", () => resetTimeout(timeout_id));
@@ -363,6 +374,8 @@
       openTaskBar(wrapper, widgetClone, widgetObject, true);
     };
     wrapper.append(expandButton);
+    console.log(widgetClone.clientHeight, widgetClone.clientWidth)
+
     return widgetClone;
   };
 

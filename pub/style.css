@@ -17,7 +17,7 @@ body {
 }
 
 .widgit-taskbar button:hover {
-  background-color: #848f9a !important;
+  background-color: #917ded !important;
 }
 
 .widgit-removeWidget {
@@ -47,7 +47,7 @@ body {
 }
 
 .widget-expandButtonClass {
-  background: #ddd;
+  background: #b3a9e2;
 }
 
 .widget-expandButtonClass:hover {

@@ -32,6 +32,40 @@ img {
 
 .widgit-widget:hover {
   opacity: 0.8;
-  background: #ddd;
+  background: #bab1e2;
+}
+
+.widgit-widget2 {
+  -webkit-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+}
+
+.widgit-widget2:hover {
+  opacity: 0.8;
+  background: red;
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+@-webkit-keyframes grow {
+  from {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  to {
+    -webkit-transform: scale(1.5);
+            transform: scale(1.5);
+  }
+}
+
+@keyframes grow {
+  from {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  to {
+    -webkit-transform: scale(1.5);
+            transform: scale(1.5);
+  }
 }
 /*# sourceMappingURL=exampleStyles.css.map */

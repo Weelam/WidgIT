@@ -48,6 +48,7 @@
 
 .home-bottom {
 	padding: 0 20px;
+  margin: 20px;
 }
 
 .examples-root {
@@ -58,13 +59,52 @@
 
 .examples-example {
   margin: 10px 0;
+  width: 100%;
+
+  h4 {
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin: 10px 0;
+    color: #735ae7;
+  }
+  
+  p {
+    margin: 15px 0;
+    font-size: 1.1rem;
+    font-weight: 450;
+  }
+}
+
+.examples-code {
+  margin: 15px 0;
+
 }
 
 .examples-widgitDiv {
   background: #ddd;
   padding: 20px;
+  display: flex;
+  align-items: center;
+  height: 500px;
+  p {
+    background: #ddd;
+    margin: 10px;
+  }
+}
+
+.examples-widgit-1 {
+  height: 400px;
+  width: auto;
 }
 
 code {
   display: block;
+}
+
+video {
+  width: 400px;
+}
+
+.examples-gif {
+  box-shadow: 0px 0px 2px black;
 }

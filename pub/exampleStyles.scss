@@ -31,6 +31,16 @@ img {
 .widgit-widget {
     &:hover {
         opacity: 0.8;
-        background: #ddd;
+        background: #bab1e2;
     }
 }
+
+.widgit-widget2 {
+    transition: all .2s ease-in-out;
+    &:hover {
+        opacity: 0.8;
+        background: red;
+        transform: scale(1.1);
+    }
+}
+

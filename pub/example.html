@@ -60,7 +60,7 @@
     <div class="home-landing">
       <h1>WidgIT.js</h1>
       <h6>Eliminate the use of scrolling back and forth on any webpage</h6>
-      <button class="button">
+      <button class="button home-scrollButton">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="40"
@@ -79,104 +79,318 @@
     </div>
 
     <div class="home-bottom">
-      <div class="examples-root">
-        <div  class="examples-example">
-          <h4>Basic usage</h4>
-          <div class="examples-content">
-            <div class="examples-widgitDiv">
-              <img class="examples-widgit" src="./media/cookout.jpg" />
-            </div>
+      <div class="home-mainTab tabs is-centered">
+        <ul>
+          <li index=0 class="is-active"><a>Examples</a></li>
+          <li index=1><a>Documentation</a></li>
+        </ul>
+      </div>
 
-            <div index="0" class="example-code">
+      <div class="documentation">
+        <div class="documentation-methods">
+
+
+          
+        </div>
+      </div>
+      <div class="examples">
+        <div class="examples-example">
+          <h4>Overview</h4>
+          <p>
+            When scrolling through a webpage you often find yourself wanting to
+            revisit a certain image, diagram or any type of media. But in order to
+            do so, you must scroll through the page again in order to find it. I
+            don't know about you, but I find this task to be really annoying,
+            especially when this happens on a normal basis. Wouldn't it be nice to
+            have that image right in front of you at all times so you can have
+            easy access to it whenever you want. Well you can do this now with
+            WidgIT.js
+          </p>
+          ***** insert gif ****
+        </div>
+  
+        <div class="examples-root">
+          <div class="examples-example">
+            <h4>Basic usage</h4>
+            <img class="examples-gif" src="media/basic-usage.gif">
+            <p>
+              Pick one image you like down below. Once you have chosen, hold down
+              your mouse on this image for 0.5s and watch the widget pop out! You
+              can drag the widget while the mouse is held down. If you have
+              decided on a place to put the widget, just simply let go. Now watch
+              how when you scroll, the widget will stay in place! You can also
+              create as many as you want, try it!
+              <br /><br />
+              <b>Now, keep this widget with you!</b> We are going to use it to help guide you through the basic usages
+              of the library! If you want to adjust the positioning of the widget,
+              you can hold down your mouse again and drag it wherever you desire.
+            </p>
+            <div class="examples-content">
+              <div class="examples-widgitDiv">
+                <img class="examples-widgit-1" src="./media/cookout.jpg" />
+                <img class="examples-widgit-1" src="./media/final_boss.jpeg" />
+                <img class="examples-widgit-1" src="./media/meme.jpg" />
+              </div>
+  
+              <div index="0" class="examples-code">
+                <div class="tabs">
+                  <ul>
+                    <li index="0" class="is-active"><a>JS</a></li>
+                    <li index="1"><a>HTML</a></li>
+                    <li index="2"><a>CSS</a></li>
+                  </ul>
+                </div>
+                <pre index="0" class="language-js"><code class="language-js"> 
+  const widgit1 = document.querySelector(".examples-widgit-1");
+  
+  let widget1 = createWidget(widgit1);
+  widget1.setIdentifier("widgit-widget");
+                </code></pre>
+                <pre
+                  index="1"
+                  style="display: none"
+                ><code >              
+  &lt;img class=&quot;examples-widgit-1&quot; src=&quot;./media/cookout.jpg&quot; /&gt;
+  &lt;img class=&quot;examples-widgit-1&quot; src=&quot;./media/final_boss.jpeg&quot; /&gt;
+  &lt;img class=&quot;examples-widgit-1&quot; src=&quot;./media/meme.jpg&quot; /&gt;
+                </code></pre>
+                <pre index="2" style="display: none"><code >
+  .examples-widgit-1 {
+    height: 400px;
+    width: auto;
+  }
+                </code></pre>
+              </div>
+            </div>
+          </div>
+          <div class="examples-example">
+            <h4>Resizing</h4>
+            <p>
+              If you hover on the 4 corners of the widget, you will see arrow
+              signs. Hold down on your mouse button and then drag it. You'll
+              notice that the widget's size changes as well. You can perform the
+              same maneuver on all 4 corners to get the size that you want!
+            </p>
+            <img  class="examples-gif" src="media/resizing.gif">
+  
+          </div>
+          <div class="examples-example">
+            <h4>Menu</h4>
+            <p>
+              At the top right you'll see a right arrow icon, if you click on that
+              a menu will slide open. Here, there are 3 more functionalities, we
+              will go over them down below, so keep your widget!
+            </p>
+            <img  class="examples-gif" src="media/menu.gif">
+          </div>
+  
+          <div class="examples-example">
+            <h4>Scroll</h4>
+            <p>
+              If you ever want to go back to where you originally got this widget
+              from, you can do so! In the menu, click on the scroll option, and
+              it'll send you back to the beginning. Give it a try!
+            </p>
+            <img  class="examples-gif" src="media/scroll.gif">
+  
+          </div>
+          <div class="examples-example">
+            <h4>Close</h4>
+            <p>
+              You can close the menu whenever you want as well! Just click the
+              close option in the menu. You can always reopen it by clicking the
+              button in the top right.
+            </p>
+            <img  class="examples-gif" src="media/close.gif">
+          </div>
+          <div class="examples-example">
+            <h4>Remove widget</h4>
+            <p>
+              Now, you've probably tired of your widget by now. Let's try out some
+              different ones!. Remove this widget by clicking on the remove option
+              in the menu.
+            </p>
+            <img  class="examples-gif"src="media/remove.gif">
+          </div>
+          <div class="examples-example">
+            <h4>Other Widgets</h4>
+            <img  class="examples-gif"src="media/other-widgets.gif">
+  
+            <p>
+              You can also make widgets out of other elements, like video and p
+              tags. The functionality of the original element is maintained, this
+              means you're even able to watch videos as you browse through a
+              webpage! Try it out!
+            </p>
+            <div class="examples-content">
+              <div class="examples-widgitDiv">
+              <video class="examples-widgit-1" controls>
+                <source src="./media/raccoon_vibing.mp4" type="video/mp4" />
+              </video>
+              <video class="examples-widgit-1" controls>
+                <source src="./media/frog-vibbing.mp4" type="video/mp4" />
+              </video>
+  
+              <p class="examples-widgit-1">
+                Sint eiusmod duis deserunt laboris fugiat. Quis cillum aliquip
+                enim non tempor labore. Commodo mollit adipisicing est cillum
+                cupidatat nulla. Officia excepteur cillum qui sint. Ex nisi anim
+                sit eu nisi aliqua ipsum magna pariatur culpa. Consectetur culpa
+                qui nulla aliqua labore sit quis nisi. Magna consectetur qui
+                enim aliqua eu Lorem. Laboris pariatur do sint est labore ipsum
+                adipisicing exercitation laborum in. Velit minim eu voluptate
+                dolore cupidatat aliquip ullamco deserunt mollit ad velit nulla
+                id anim.
+              </p>
+              </div>
+  
+              <div index="1" class="examples-code">
+                <div class="tabs">
+                  <ul>
+                    <li index="0" class="is-active"><a>JS</a></li>
+                    <li index="1"><a>HTML</a></li>
+                    <li index="2"><a>CSS</a></li>
+                  </ul>
+                </div>
+                <pre index="0" class="language-js"><code class="language-js"> 
+  const widgit1 = document.querySelector(".examples-widgit-1");
+  
+  let widget1 = createWidget(widgit1);
+  widget1.setIdentifier("widgit-widget");
+                </code></pre>
+                <pre
+                  index="1"
+                  style="display: none"
+                ><code >
+  &lt;video class=&quot;examples-widgit-1&quot; controls&gt;
+  &lt;source src=&quot;./media/raccoon_vibing.mp4&quot; type=&quot;video/mp4&quot; /&gt;
+  &lt;/video&gt;
+  &lt;video class=&quot;examples-widgit-1&quot; controls&gt;
+  &lt;source src=&quot;./media/frog-vibbing.mp4&quot; type=&quot;video/mp4&quot; /&gt;
+  &lt;/video&gt;
+  
+  &lt;p class=&quot;examples-widgit-1&quot;&gt;
+  Sint eiusmod duis deserunt laboris fugiat. Quis cillum aliquip
+  enim non tempor labore. Commodo mollit adipisicing est cillum
+  cupidatat nulla. Officia excepteur cillum qui sint. Ex nisi anim
+  sit eu nisi aliqua ipsum magna pariatur culpa. Consectetur culpa
+  qui nulla aliqua labore sit quis nisi. Magna consectetur qui
+  enim aliqua eu Lorem. Laboris pariatur do sint est labore ipsum
+  adipisicing exercitation laborum in. Velit minim eu voluptate
+  dolore cupidatat aliquip ullamco deserunt mollit ad velit nulla
+  id anim.
+  &lt;/p&gt;
+                </code></pre>
+                <pre index="2" style="display: none"><code >
+  .examples-widgit-1 {
+    height: 400px;
+    width: auto;
+  }
+                </code></pre>
+              </div>
+            </div>
+          </div>
+          <div class="examples-example">
+            <h4>Change identifier</h4>
+            <img  class="examples-gif"src="media/identifier.gif">
+  
+            <p> You can change how the end user can perceive which elements they can make widgets out of! So far in the examples we have shown
+              they simply change opacity and background color on hover. You can customize the css for this in whatever you like, just simply using the <code style="display: inline;">setIdentifier(className)</code> method associated with the widget (please use this method to set the css, otherwise it won't work properly). See the code examples below for more details. Here, the first image uses the same identifier css, but the second one now transforms in scale on hover.
+            </p>
+            <div class="examples-content">
+              <div class="examples-widgitDiv">
+                <img class="examples-widgit-star" src="media/star_platinum.jpg">
+                <img class="examples-widgit-green" src="media/green_stand.jpg">
+              </div>
+  
+              <div index="2" class="examples-code">
+                <div class="tabs">
+                  <ul>
+                    <li index="0" class="is-active"><a>JS</a></li>
+                    <li index="1"><a>HTML</a></li>
+                    <li index="2"><a>CSS</a></li>
+                  </ul>
+                </div>
+                <pre index="0" class="language-js"><code class="language-js"> 
+  const star = document.querySelector(".examples-widgit-star")
+  const green = document.querySelector(".examples-widgit-green")
+  
+  // setIdentifier takes in the name of a css class, and applies that to the element itself! 
+  let starWidget = createWidget(star);
+  starWidget.setIdentifier("widgit-widget")
+  
+  let greenWidget = createWidget(green);
+  greenWidget.setIdentifier("widgit-widget2")</code></pre>
+                <pre
+                  index="1"
+                  style="display: none"
+                ><code >
+  &lt;img class=&quot;examples-widgit-star&quot; src=&quot;media/star_platinum.jpg&quot;&gt;
+  &lt;img class=&quot;examples-widgit-green&quot; src=&quot;media/green_stand.jpg&quot;&gt;
+                </code></pre>
+                <pre index="2" style="display: none"><code >
+  .examples-widgit-1 {
+    height: 400px;
+    width: auto;
+  }
+  
+  .widgit-widget:hover {
+    opacity: 0.8;
+    background: #bab1e2;
+  }
+  
+  .widgit-widget2 {
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+  }
+  
+  .widgit-widget2:hover {
+    opacity: 0.8;
+    background: red;
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+  }
+                </code></pre>
+              </div>
+            </div>
+          </div>
+          <div class="examples-example">
+            <h4>Set hold down time</h4>
+            <p> You can also change how long a user must hold their mouse button down in order for the widget to be created. The default time is 0.5s, but if you want to specify a different time, you can do so! Simply use <code style="display: inline">setHoldDownTime(time)</code> where time is in ms. </p>
+            <div index="3" class="examples-code">
               <div class="tabs">
                 <ul>
-                  <li index="0"><a>JS</a></li>
-                  <li index="1" class="is-active"><a>HTML</a></li>
-                  <li index="2"><a>CSS</a></li>
+                  <li index="0" class="is-active"><a>JS</a></li>
                 </ul>
               </div>
-              <code index="0">js code</code>
-              <code index="1" style="display: none;">html code</code>
-              <code index="2" style="display: none;">css code</code>
-
-        
+              <pre index="0" class="language-js"><code class="language-js"> 
+  // this will set the hold down time to 2s
+  setHoldDownTime(2000)
+  </code></pre>
+              
             </div>
           </div>
-        </div>
-        <div class="examples-example">
-          <h4>Resizing</h4>
-
-          <div index="1" class="example-code">
-            <div class="tabs">
-              <ul>
-                <li index="0" class="is-active"><a>JS</a></li>
-                <li index="1"><a>HTML</a></li>
-                <li index="2"><a>CSS</a></li>
-              </ul>
-            </div>
           </div>
-        </div>
-        <div class="examples-example">
-          <h4>Scroll</h4>
-          <div index="2" class="example-code">
-            <div class="tabs">
-              <ul>
-                <li index="0" class="is-active"><a>JS</a></li>
-                <li index="1"><a>HTML</a></li>
-                <li index="2"><a>CSS</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="examples-example">
-          <h4>Remove widget</h4>
-          <div index="3" class="example-code">
-            <div class="tabs">
-              <ul>
-                <li index="0" class="is-active"><a>JS</a></li>
-                <li index="1"><a>HTML</a></li>
-                <li index="2"><a>CSS</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="examples-example">
-          <h4>Change identifier</h4>
-          <div index="4" class="example-code">
-            <div class="tabs">
-              <ul>
-                <li index="0" class="is-active"><a>JS</a></li>
-                <li index="1"><a>HTML</a></li>
-                <li index="2"><a>CSS</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="examples-example">
-          <h4>Set hold down time</h4>
-          <div index="5" class="example-code">
-            <div class="tabs">
-              <ul>
-                <li index="0" class="is-active"><a>JS</a></li>
-                <li index="1"><a>HTML</a></li>
-                <li index="2"><a>CSS</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="examples-example">
-          <h4>Set menu close/open animation speed</h4>
-          <div index="6" class="example-code">
-            <div class="tabs">
-              <ul>
-                <li index="0" class="is-active"><a>JS</a></li>
-                <li index="1"><a>HTML</a></li>
-                <li index="2"><a>CSS</a></li>
-              </ul>
+          <div class="examples-example">
+            <h4>Set menu close/open animation speed</h4>
+            <p> You can also chanage how long it takes for the for the menu to slide out. The default time is 1s, but if you want to specify a different time, you can do so! Simply use <code style="display: inline">setMenuOpenAnimationSpeed(time)</code> or <code style="display: inline">setMenuCloseAnimationSpeed(time)</code>, where time is in ms. </p>
+            <div index="4" class="examples-code">
+              <div class="tabs">
+                <ul>
+                  <li index="0" class="is-active"><a>JS</a></li>
+                </ul>
+              </div>
+              <pre index="0" class="language-js"><code class="language-js"> 
+  // this will set the menu animations to last 0.5s
+  setMenuOpenAnimationSpeed(500)
+  setMenuCloseAnimationSpeed(500)
+  </code></pre>
+              
             </div>
           </div>
         </div>
       </div>
-    </div>
+      </div>
+      
   </body>
 </html>
