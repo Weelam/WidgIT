@@ -1,6 +1,6 @@
 # js-library-lintao7
 
-Heroku link: https://agile-river-90632.herokuapp.com/example.html
+Documentation link: https://agile-river-90632.herokuapp.com/example.html
 
 <h4>Getting started</h4>
 <p> The library requires the followings: Jquery, widgit.js (library code) and style.css (css stylesheet for the library). Make sure to have the Jquery script before the widigt.js script. </p>
